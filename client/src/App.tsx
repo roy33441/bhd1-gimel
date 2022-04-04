@@ -6,9 +6,7 @@ import BottomBar from 'components/BottomBar/BottomBar';
 
 const App: FC = (): JSX.Element => (
   <>
-    <TopBar />
     <Router />
-    <BottomBar />
   </>
 );
 

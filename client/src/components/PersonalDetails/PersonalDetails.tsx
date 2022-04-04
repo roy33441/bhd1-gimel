@@ -13,7 +13,9 @@ const PersonalDetails: FC = (): JSX.Element => {
       <Typography className={classes.title} color='secondary'>
         <Box fontWeight='fontWeightLight'>שלום</Box>
       </Typography>
-      <Typography className={classes.name} color='secondary'>תום בן ארויה</Typography>
+      <Typography className={classes.name} color='secondary'>
+          {sessionStorage.getItem("tzoer_id")}
+      </Typography>
       <Chip size='small' className={classes.roleChip} color='primary' label='קה"ד' />
     </div>
   );
