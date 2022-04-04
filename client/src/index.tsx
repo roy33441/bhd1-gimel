@@ -5,7 +5,9 @@ import reportWebVitals from 'reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { ApolloProvider } from '@apollo/client';
 
+import { apolloClient } from 'common/apolloClient';
 import { jss } from 'common/rtl';
 import { JssProvider } from 'react-jss';
 
@@ -16,7 +18,9 @@ ReactDOM.render(
     <JssProvider jss={jss}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <App />
+        <ApolloProvider client={apolloClient}>
+          <App />
+        </ApolloProvider>
       </ThemeProvider>
     </JssProvider>
   </BrowserRouter>,
