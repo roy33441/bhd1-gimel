@@ -11,7 +11,8 @@ const ButtonsGroup: FC = (): JSX.Element => {
   const sitesURLs = {
     report: 'https://one.prat.idf.il/',
     idf: 'https://www.idf.il/',
-    moodle: 'https://campus.digital.idf.il/'
+    moodle: 'https://campus.digital.idf.il/',
+    telegramBot: 'https://t.me/BHD1_bot'
   };
 
   return (
@@ -33,6 +34,12 @@ const ButtonsGroup: FC = (): JSX.Element => {
         iconURL='icons/moodle.svg'
         label='מודל'
         color={theme.palette.success.light}
+      />
+      <LinkButton
+        siteURL={sitesURLs.telegramBot}
+        iconURL='icons/telegramBot.svg'
+        label='בוט'
+        color={'#BFACC8'}
       />
     </div>
   );
