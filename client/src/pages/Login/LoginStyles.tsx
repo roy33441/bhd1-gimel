@@ -26,7 +26,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   loginButton: {
     fontSize: 23,
-    padding: theme.spacing(2),
+    borderRadius: theme.spacing(2),
+    padding: theme.spacing(2.5),
     width: '70%'
   }
 }));
