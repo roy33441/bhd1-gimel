@@ -8,7 +8,22 @@ export const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(32),
     borderRadius: theme.spacing(1.5),
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'center'
+  },
+  listItem: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  details: {
+    display: 'flex',
+    justifyContent: 'center',
+    fontSize: 15,
+    fontWeight: 600
+  },
+  title: {
+    display: 'flex',
+    justifyContent: 'center',
+    fontSize: 24,
+    fontWeight: 600,
   }
 }));
