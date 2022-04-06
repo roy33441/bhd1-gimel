@@ -7,16 +7,16 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import RemoveCircleOutlineRoundedIcon from '@material-ui/icons/RemoveCircleOutlineRounded';
 import ListItem from '@material-ui/core/ListItem';
 
-import { useStyles } from './TestStyles';
+import { useStyles } from './TestCardStyles';
 
-interface TestProps {
+interface TestCardProps {
   title: string;
   numOfQuestions: number;
   link: string;
   isFinished: boolean;
 }
 
-const Test: FC<TestProps> = (props): JSX.Element => {
+const TestCard: FC<TestCardProps> = (props): JSX.Element => {
   const { title, numOfQuestions, link, isFinished } = props;
   const classes = useStyles();
 
@@ -55,6 +55,7 @@ const Test: FC<TestProps> = (props): JSX.Element => {
         <div className={classes.bottomHeader}>
           <Chip
             className={classes.startButton}
+            disabled={isFinished}
             icon={<ArrowLeftIcon />}
             variant='outlined'
             color='secondary'
@@ -67,4 +68,4 @@ const Test: FC<TestProps> = (props): JSX.Element => {
   );
 };
 
-export default Test;
+export default TestCard;
