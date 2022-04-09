@@ -1,65 +1,52 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import Paper from '@material-ui/core/Paper';
+import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import CircularProgress, { CircularProgressProps } from '@material-ui/core/CircularProgress';
+import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 import { useStyles } from './AttendancePreviewStyles';
-import { Grid, List, ListItem } from '@material-ui/core';
 
 const AttendancePreview: FC = (): JSX.Element => {
-  const [sumCount, setCount] = useState(59);
-  const [presentCount, setPresentCount] = useState(46);
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper}>
-      <List>
-        <ListItem className={classes.listItem}>
+    <Paper className={classes.container}>
+      <div style={{ display: 'flex' }}>
+        <div style={{ flex: 1 }}></div>
+        <div className={classes.header}>
           <Typography className={classes.title}>מצ"ל</Typography>
-        </ListItem>
-        <ListItem className={classes.listItem}>
-          <Box position="relative" display="inline-flex">
-            <CircularProgress size={100} variant="determinate" value={Math.round(sumCount/presentCount*100)}/>
-              <Box
-                top={0}
-                left={0}
-                bottom={0}
-                right={0}
-                position="absolute"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Typography variant="caption" component="div" color="textSecondary">{presentCount}/{sumCount}</Typography>
-              </Box>
-          </Box>
-        </ListItem>
-        <br />
-        <ListItem>
-          <Grid container  
-                direction="row"
-                justifyContent="space-between"
-                alignItems="flex-end" 
-                spacing={3}>
-            <Grid item xs={3}>
-              <Typography className={classes.details}>סה"כ</Typography>
-              <Typography className={classes.details}>{sumCount}</Typography>
-            </Grid>
-            <Grid item xs={3}>
-              <Typography className={classes.details}>נוכחים</Typography>
-              <Typography className={classes.details}>{presentCount}</Typography>            
-            </Grid>
-            <Grid item xs={3}>
-              <Typography className={classes.details}>נעדרים</Typography>
-              <Typography className={classes.details}>{sumCount-presentCount}</Typography>    
-            </Grid>
-          </Grid>
-        </ListItem>
-      </List>
-
-      
-
+          <Typography className={classes.dropdown}>צוות 16</Typography>
+        </div>
+        <Icon className={classes.iconRoot}>
+          <img className={classes.imageIcon} src='icons/newStatus.svg' alt='status' />
+        </Icon>
+      </div>
+      <div className={classes.circularProgressContainer}>
+        <CircularProgressbar
+          styles={buildStyles({
+            pathColor: '#F24C00',
+            trailColor: '#6B6A6A',
+            textColor: '#F24C00'
+          })}
+          value={60}
+          text={'22/43'}
+        />
+      </div>
+      <div className={classes.bottom}>
+        <div className={classes.statusContainer}>
+          <Typography className={classes.number}>43</Typography>
+          <Typography className={classes.status}>סה"כ</Typography>
+        </div>
+        <div className={classes.currStatusContainer}>
+          <Typography className={classes.number}>22</Typography>
+          <Typography className={classes.status}>נוכחים</Typography>
+        </div>
+        <div className={classes.statusContainer}>
+          <Typography className={classes.number}>11</Typography>
+          <Typography className={classes.status}>נעדרים</Typography>
+        </div>
+      </div>
     </Paper>
   );
 };
