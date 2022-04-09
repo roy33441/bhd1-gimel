@@ -6,6 +6,7 @@ import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 import { useStyles } from './AttendancePreviewStyles';
+import CurrentStatus from 'components/CurrentStatus/CurrentStatus';
 
 const AttendancePreview: FC = (): JSX.Element => {
   const classes = useStyles();
@@ -34,18 +35,7 @@ const AttendancePreview: FC = (): JSX.Element => {
         />
       </div>
       <div className={classes.bottom}>
-        <div className={classes.statusContainer}>
-          <Typography className={classes.number}>43</Typography>
-          <Typography className={classes.status}>סה"כ</Typography>
-        </div>
-        <div className={classes.currStatusContainer}>
-          <Typography className={classes.number}>22</Typography>
-          <Typography className={classes.status}>נוכחים</Typography>
-        </div>
-        <div className={classes.statusContainer}>
-          <Typography className={classes.number}>11</Typography>
-          <Typography className={classes.status}>נעדרים</Typography>
-        </div>
+        <CurrentStatus missing={11} present={22} total={43} />
       </div>
     </Paper>
   );

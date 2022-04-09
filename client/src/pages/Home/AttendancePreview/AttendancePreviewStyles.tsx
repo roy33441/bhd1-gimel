@@ -43,19 +43,5 @@ export const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(1.6),
     marginRight: theme.spacing(1),
     marginLeft: theme.spacing(1)
-  },
-  statusContainer: {
-    color: '#000000'
-  },
-  currStatusContainer: {
-    color: '#F24C00'
-  },
-  number: {
-    fontSize: 28,
-    fontWeight: 400
-  },
-  status: {
-    marginTop: theme.spacing(-1.6),
-    fontSize: 16
   }
 }));
