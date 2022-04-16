@@ -7,13 +7,19 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { useHistory } from 'react-router';
 import List from '@material-ui/core/List';
-import Icon from '@material-ui/core/Icon';
 import ListItem from '@material-ui/core/ListItem';
 import IconButton from '@material-ui/core/IconButton';
 import { AccountCircle } from '@material-ui/icons';
 import Chip from '@material-ui/core/Chip';
+import { useLazyQuery } from '@apollo/client/react/hooks/useLazyQuery';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import { useStyles } from './LoginStyles';
+import { LOGIN_TZOER } from 'queries/tzoerQueries';
+import { Tzoer, TzoerGQL } from 'types/tzoer';
+import auth from 'common/auth';
 
 interface State {
   id: string;
@@ -24,9 +30,19 @@ interface State {
   showPassword: boolean;
 }
 
+interface GetLoginTzoerVars {
+  personal_id: string;
+  password: string;
+}
+
+function Alert(props: AlertProps) {
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
+}
+
 const Login: FC = (): JSX.Element => {
   const classes = useStyles();
   const history = useHistory();
+
   const [values, setValues] = useState<State>({
     id: '',
     amount: '',
@@ -36,6 +52,8 @@ const Login: FC = (): JSX.Element => {
     showPassword: false
   });
 
+  const [errorLogin, setErrorLogin] = useState<boolean>(false);
+
   const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -44,18 +62,26 @@ const Login: FC = (): JSX.Element => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
   };
 
-  const handleClickLogin = () => {
-    if (values.id === '322298746' && values.password === 'Aa123456' || values.id === 'admin') {
-      sessionStorage.setItem('tzoer_id', values.id);
-      history.push('/home');
-    } else {
-      alert('סיסמא שגויה');
-    }
+  const onCompleteLoginTzoer = (data: TzoerGQL) => {
+    if (!data.tzoer[0]) return setErrorLogin(true);
+
+    const loggedTzoer: Tzoer = {
+      ...data.tzoer[0],
+      team: (({ id, name }) => ({ id, name }))(data.tzoer[0].team),
+      pluga: (({ id, name }) => ({ id, name }))(data.tzoer[0].team.pluga)
+    };
+
+    auth.saveLoggedTzoer(loggedTzoer);
+    history.push('/home');
   };
+
+  const [getLoginTzoer, { loading }] = useLazyQuery<TzoerGQL, GetLoginTzoerVars>(LOGIN_TZOER, {
+    onCompleted: onCompleteLoginTzoer
+  });
 
   return (
     <>
@@ -101,14 +127,30 @@ const Login: FC = (): JSX.Element => {
           </FormControl>
         </ListItem>
         <ListItem className={classes.root}>
-          <Chip
-            className={classes.loginButton}
-            color='primary'
-            label='יאללה שנתחבר'
-            onClick={handleClickLogin}
-          />
+          {!loading ? (
+            <Chip
+              className={classes.loginButton}
+              color='primary'
+              label='יאללה שנתחבר'
+              onClick={() =>
+                getLoginTzoer({
+                  variables: { personal_id: values.id, password: values.password }
+                })
+              }
+              disabled={!values.id || !values.password}
+            />
+          ) : (
+            <Chip
+              icon={<CircularProgress size={30} />}
+              className={classes.loginButton}
+              color='primary'
+            />
+          )}
         </ListItem>
       </List>
+      <Snackbar open={errorLogin} autoHideDuration={2500} onClose={() => setErrorLogin(false)}>
+        <Alert severity='warning'>שם משתמש או סיסמא אינם נכונים</Alert>
+      </Snackbar>
     </>
   );
 };

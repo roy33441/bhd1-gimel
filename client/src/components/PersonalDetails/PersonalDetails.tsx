@@ -5,18 +5,24 @@ import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from './PersonalDetailsStyles';
 
-const PersonalDetails: FC = (): JSX.Element => {
+interface PersonalDetailsProps {
+  name: string;
+  role: string;
+}
+
+const PersonalDetails: FC<PersonalDetailsProps> = (props): JSX.Element => {
+  const { name, role } = props;
   const classes = useStyles();
-  
+
   return (
     <div>
       <Typography className={classes.title} color='secondary'>
         <Box fontWeight='fontWeightLight'>שלום</Box>
       </Typography>
       <Typography className={classes.name} color='secondary'>
-          {sessionStorage.getItem("tzoer_id")}
+        {name}
       </Typography>
-      <Chip size='small' className={classes.roleChip} color='primary' label='קה"ד' />
+      <Chip size='small' className={classes.roleChip} color='primary' label={role} />
     </div>
   );
 };
