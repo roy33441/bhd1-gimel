@@ -55,11 +55,10 @@ const TestCard: FC<TestCardProps> = (props): JSX.Element => {
         <div className={classes.bottomHeader}>
           <Chip
             className={classes.startButton}
-            disabled={isFinished}
             icon={<ArrowLeftIcon />}
             variant='outlined'
             color='secondary'
-            label='יאללה נתחיל'
+            label='יאללה שנתחיל'
             onClick={openTestTab}
           />
         </div>

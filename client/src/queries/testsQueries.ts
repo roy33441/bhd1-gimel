@@ -12,8 +12,8 @@ export const GET_TESTS = gql`
 `;
 
 export const GET_SCORED_TESTS_BY_PERSONAL_ID = gql`
-  {
-    scoredTests: tzoer_score(where: { tzoer: { personal_id: { _eq: "322298746" } } }) {
+  query ($personal_id: String!) {
+    scoredTests: tzoer_score(where: { tzoer: { personal_id: { _eq: $personal_id } } }) {
       id
       test_id
     }

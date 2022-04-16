@@ -4,6 +4,7 @@ import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { Link } from 'react-router-dom';
 
 import { useStyles } from './AttendancePreviewStyles';
 import CurrentStatus from 'components/CurrentStatus/CurrentStatus';
@@ -20,7 +21,9 @@ const AttendancePreview: FC = (): JSX.Element => {
           <Typography className={classes.dropdown}>צוות 16</Typography>
         </div>
         <Icon className={classes.iconRoot}>
-          <img className={classes.imageIcon} src='icons/newStatus.svg' alt='status' />
+          <Link to='/attendance'>
+            <img className={classes.imageIcon} src='icons/newStatus.svg' alt='status' />
+          </Link>
         </Icon>
       </div>
       <div className={classes.circularProgressContainer}>
