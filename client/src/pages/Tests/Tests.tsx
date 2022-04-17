@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useQuery } from '@apollo/client';
 import List from '@material-ui/core/List';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
 
 import TestCard from 'pages/Tests/TestCard/TestCard';
 import { Test, TestGQL } from 'types/test';
@@ -31,14 +32,17 @@ const Tests: FC = (): JSX.Element => {
 
   if (loadingAllTests || loadingscoredTests) {
     return (
-      <div className={classes.loaderContainer}>
+      <div className={classes.loaderOrErrorContainer}>
         <CircularProgress size={80} color='primary' />
       </div>
     );
   }
   if (!scoredTestsData || !testsData) {
-    alert('שגיאה בטעינת הב"בים');
-    return <></>;
+    return (
+      <div className={classes.loaderOrErrorContainer}>
+        <Typography>שגיאה בטעינת הב"בים</Typography>
+      </div>
+    );
   }
 
   const scoredTestsIds: number[] = scoredTestsData.scoredTests.map(test => test.id);

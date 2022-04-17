@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from 'pages/Home/Home';
@@ -11,25 +11,23 @@ import ProtectedRoute from 'components/ProtectedRoute';
 import PublicRoute from 'components/PublicRoute';
 import WithAuthentication from 'components/WithAuthentication';
 
-const Router: FC = () => {
-  return (
-    <Switch>
-      <PublicRoute path='/login' component={Login} />
-      <ProtectedRoute exact path='/' render={() => <Redirect to='/home' />} />
-      <WithAuthentication>
-        <>
-          <TopBar />
-          <div>
-            <Route path='/home' component={Home} />
-            <Route path='/tests' component={Tests} />
-            <Route path='/attendance' component={Attendance} />
-            <Redirect to='/home' />
-          </div>
-          <BottomBar />
-        </>
-      </WithAuthentication>
-    </Switch>
-  );
-};
+const Router: FC = (): JSX.Element => (
+  <Switch>
+    <PublicRoute path='/login' component={Login} />
+    <ProtectedRoute exact path='/' render={() => <Redirect to='/home' />} />
+    <WithAuthentication>
+      <>
+        <TopBar />
+        <div>
+          <Route path='/home' component={Home} />
+          <Route path='/tests' component={Tests} />
+          <Route path='/attendance' component={Attendance} />
+          {/* <Redirect to='/home' /> */}
+        </div>
+        <BottomBar />
+      </>
+    </WithAuthentication>
+  </Switch>
+);
 
 export default Router;

@@ -2,15 +2,17 @@ import { Theme } from '@material-ui/core/styles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export const useStyles = makeStyles((theme: Theme) => ({
-  loaderOrErrorContainer: {
-    height: '80vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column'
+  notReportedContainer: {
+    marginTop: theme.spacing(2),
+    height: '33%'
   },
-  testsList: {
-    maxHeight: 650,
+  list: {
+    marginTop: theme.spacing(-2),
+    maxHeight: 170,
     overflow: 'auto'
+  },
+  title: {
+    fontSize: 13,
+    textAlign: 'center'
   }
 }));
