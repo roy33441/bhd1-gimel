@@ -4,6 +4,7 @@ import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from './PersonalDetailsStyles';
+import SettingsFab from 'components/Settings/SettingFab/SettingsFab';
 
 interface PersonalDetailsProps {
   name: string;
@@ -22,7 +23,11 @@ const PersonalDetails: FC<PersonalDetailsProps> = (props): JSX.Element => {
       <Typography className={classes.name} color='secondary'>
         {name}
       </Typography>
-      <Chip size='small' className={classes.roleChip} color='primary' label={role} />
+      <div className={classes.roleContainer}>
+        <Chip size='small' className={classes.roleChip} color='primary' label={role} />
+        <SettingsFab />
+      </div>
+
     </div>
   );
 };

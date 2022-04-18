@@ -40,7 +40,7 @@ const Tests: FC = (): JSX.Element => {
     alert('שגיאה בטעינת הב"בים');
     return <></>;
   }
-
+  
   const scoredTestsIds: number[] = scoredTestsData.scoredTests.map(test => test.id);
   const tests: Test[] = testsData.allTests.map(test => ({
     ...test,
