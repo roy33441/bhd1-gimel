@@ -1,34 +1,46 @@
-import { FC } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
 import List from '@material-ui/core/List';
-import IconButton from '@material-ui/core/IconButton';
-import AttendanceListItem from 'pages/Attendance/AttendanceListItem/AttendanceListItem';
+import ReportedListItem from 'pages/Attendance/ReportedListItem/ReportedListItem';
 
 import { useStyles } from './MissingListStyles';
+import { Tzoer } from 'types/tzoer';
+import { Attendance } from 'types/attendance';
 
 interface MissingListProps {
   isEditingReport: boolean;
+  list: Pick<Tzoer, 'id' | 'first_name' | 'last_name'>[];
+  onRemoveItem: Dispatch<SetStateAction<Attendance[]>>;
+  attendanceList: Attendance[];
 }
 
 const MissingList: FC<MissingListProps> = (props): JSX.Element => {
-  const { isEditingReport } = props;
+  const { isEditingReport, list, onRemoveItem, attendanceList } = props;
   const classes = useStyles({ isEditingReport });
+
+  const removeFromList = (tzoerId: number): void => {
+    onRemoveItem(prevAttendance =>
+      prevAttendance.filter(tzoerAttendance => tzoerAttendance.tzoer_id !== tzoerId)
+    );
+  };
 
   return (
     <div className={classes.missingContainer}>
       <Typography className={classes.title}>חסרים</Typography>
       <List className={classes.list}>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => (
-          <AttendanceListItem name='תום בן ארויה' iconURL='icons/missingStatus.svg'>
-            {isEditingReport ? (
-              <IconButton size='small' className={classes.closeButton} aria-label='delete'>
-                <CloseIcon />
-              </IconButton>
-            ) : (
-              <></>
-            )}
-          </AttendanceListItem>
+        {list.map(tzoer => (
+          <ReportedListItem
+            onRemove={removeFromList}
+            iconURL='icons/missingStatus.svg'
+            isEditingReport={isEditingReport}
+            name={`${tzoer.first_name} ${tzoer.last_name}`}
+            id={tzoer.id}
+            children={
+              <Typography className={classes.missingReason}>
+                {attendanceList.find(({ tzoer_id }) => tzoer_id === tzoer.id)?.missing_reason}
+              </Typography>
+            }
+          />
         ))}
       </List>
     </div>

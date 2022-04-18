@@ -1,32 +1,47 @@
+import { Dispatch, FC, SetStateAction } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import IconButton from '@material-ui/core/IconButton';
 
 import CurrentStatus from 'components/CurrentStatus/CurrentStatus';
 import { useStyles } from './StatusStyles';
+import TeamsDropdown from './TeamsDropdown/TeamsDropdown';
+import { Team } from 'types/team';
 
-const Status = () => {
+interface StatusProps {
+  selectedTeamId: number;
+  teams: Team[];
+  changeSelectedTeam: Dispatch<SetStateAction<number>>;
+  present: number;
+  missing: number;
+  total: number;
+  onClearAttendance: () => void;
+}
+
+const Status: FC<StatusProps> = (props): JSX.Element => {
+  const { selectedTeamId, teams, changeSelectedTeam, present, missing, total, onClearAttendance } =
+    props;
   const classes = useStyles();
 
   return (
     <Paper elevation={0} className={classes.container}>
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}></div>
-        <div className={classes.dropdown}>
-          <Typography className={classes.team}>צוות 16</Typography>
-          <ExpandMoreOutlinedIcon />
-        </div>
+        <TeamsDropdown
+          changeSelectedTeam={changeSelectedTeam}
+          selectedTeamId={selectedTeamId}
+          teams={teams}
+        />
         <div className={classes.resetButton}>
           <Typography className={classes.resetTitle}>נקה דיווח</Typography>
-          <IconButton className={classes.resetIcon}>
+          <IconButton onClick={onClearAttendance} className={classes.resetIcon}>
             <RefreshIcon />
           </IconButton>
         </div>
       </div>
       <div className={classes.statusContainer}>
-        <CurrentStatus missing={11} present={22} total={43} />
+        <CurrentStatus missing={missing} present={present} total={total} />
       </div>
     </Paper>
   );

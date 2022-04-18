@@ -7,5 +7,7 @@ export const apolloClient = new ApolloClient({
       'x-hasura-admin-secret': process.env.REACT_APP_HASURA_ADMIN_SECRET
     }
   }),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    addTypename: false
+  })
 });

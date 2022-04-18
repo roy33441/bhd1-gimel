@@ -24,3 +24,13 @@ export const LOGIN_TZOER = gql`
     }
   }
 `;
+
+export const GET_TZOERS_BY_TEAM = gql`
+  query ($team_id: Int!) {
+    tzoersTeam: tzoer_tzoer(where: { team_id: { _eq: $team_id } }) {
+      id
+      first_name
+      last_name
+    }
+  }
+`;

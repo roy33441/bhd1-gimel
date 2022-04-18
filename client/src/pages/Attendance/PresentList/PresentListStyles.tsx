@@ -18,8 +18,5 @@ export const useStyles = makeStyles((theme: Theme) => ({
   title: {
     fontSize: 13,
     textAlign: 'center'
-  },
-  closeButton: {
-    paddingTop: 'initial'
   }
 }));

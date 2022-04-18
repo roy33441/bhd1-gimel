@@ -21,5 +21,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   closeButton: {
     paddingTop: 'initial'
+  },
+  missingReason: {
+    color: '#6B6A6A',
+    fontSize: 13
   }
 }));

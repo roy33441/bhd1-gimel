@@ -10,14 +10,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
     textAlign: 'center',
     zIndex: 1
   },
-  dropdown: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginTop: theme.spacing(1)
-  },
-  team: {
-    fontSize: 18
-  },
   resetButton: {
     position: 'relative',
     right: theme.spacing(-0.8),

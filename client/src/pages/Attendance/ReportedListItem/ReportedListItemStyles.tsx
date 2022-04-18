@@ -20,5 +20,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 'auto',
     marginLeft: 'auto',
     marginTop: theme.spacing(-1)
+  },
+  closeButton: {
+    paddingTop: 'initial'
   }
 }));

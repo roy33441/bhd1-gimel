@@ -14,5 +14,14 @@ export const useStyles = makeStyles((theme: Theme) => ({
   title: {
     fontSize: 13,
     textAlign: 'center'
+  },
+  finishReportTitle: {
+    color: '#7B8C7D',
+    fontSize: 11,
+    marginBottom: theme.spacing(1),
+  },
+  finishReportContainer: {
+    marginTop: theme.spacing(1),
+    textAlign: 'center'
   }
 }));

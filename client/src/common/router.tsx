@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from 'pages/Home/Home';
 import Tests from 'pages/Tests/Tests';
-import Attendance from 'pages/Attendance/Attendance';
+import AttendancePage from 'pages/Attendance/Attendance';
 import Login from 'pages/Login/Login';
 import TopBar from 'components/TopBar/TopBar';
 import BottomBar from 'components/BottomBar/BottomBar';
@@ -21,7 +21,7 @@ const Router: FC = (): JSX.Element => (
         <div>
           <Route path='/home' component={Home} />
           <Route path='/tests' component={Tests} />
-          <Route path='/attendance' component={Attendance} />
+          <Route path='/attendance' component={AttendancePage} />
           {/* <Redirect to='/home' /> */}
         </div>
         <BottomBar />

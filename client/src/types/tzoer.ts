@@ -17,6 +17,10 @@ export interface TzoerData {
   };
 }
 
+export interface TzoersTeamGQL {
+  tzoersTeam: Pick<TzoerData, 'id' | 'first_name' | 'last_name'>[];
+}
+
 export interface TzoerGQL {
   tzoer: TzoerData[];
 }

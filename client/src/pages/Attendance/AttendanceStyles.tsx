@@ -1,11 +1,14 @@
 import { Theme } from '@material-ui/core/styles';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-interface AttendanceStylesProps {
-  isEditingReport: boolean;
-}
-
 export const useStyles = makeStyles((theme: Theme) => ({
+  loaderOrErrorContainer: {
+    height: '80vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
   container: {
     display: 'flex',
     flexDirection: 'column',
