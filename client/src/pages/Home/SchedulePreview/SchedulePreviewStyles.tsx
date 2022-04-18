@@ -32,7 +32,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column'
   },
   title: {
-    fontSize: 14,
+    fontSize: 15,
+    fontWeight: 550,
     marginRight: 6
   },
   luz: {
@@ -57,7 +58,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     display: 'flex',
     alignItems: 'center',
-    fontSize: 18,
+    fontSize: 20,
+    fontWeight: 600
   },
   updateContainer: {
     display: 'flex',
@@ -73,7 +75,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
 
   },
   updateButton: {
-    fontSize: 25,
     borderRadius: theme.spacing(2),
     padding: theme.spacing(2.5),
     width: theme.spacing(30),

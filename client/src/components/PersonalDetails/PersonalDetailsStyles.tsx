@@ -4,21 +4,30 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 export const useStyles = makeStyles((theme: Theme) => ({
   title: {
     marginBottom: theme.spacing(-0.6),
-    fontSize: 19
+    fontSize: 19,
   },
   name: {
     fontSize: 23,
     fontWeight: 600
   },
+  box: {
+    display: 'flex',
+    justifyContent: 'space-between',
+
+  },
+  exit: {
+    marginTop: theme.spacing(-0.5),
+    marginLeft:  theme.spacing(-0.5),
+  },
   roleChip: {
     width: '100%',
-    fontSize: 17
+    fontSize: 17,
   },
   roleContainer: {
-    marginTop: theme.spacing(-1.2),
-    marginLeft: theme.spacing(-1.2),
+    height: theme.spacing(5),
+    marginTop: theme.spacing(-1.5),
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
   }
 }));

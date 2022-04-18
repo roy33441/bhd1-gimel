@@ -31,14 +31,22 @@ export const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     display: 'flex',
     alignItems: 'center',
+    margin: 8,
+    fontWeight: 600,
+    fontSize: 20,
+    
+  },
+  buttontitel: {
+    justifyContent: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    margin: 8,
     fontSize: 18,
   },
   importContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 10
-
   },
   divDrawer: {
     backgroundColor: '#D4D8EC',
@@ -50,8 +58,16 @@ export const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: theme.spacing(1),
-    width: theme.spacing(15),
+    margin: theme.spacing(2),
+    width: theme.spacing(25),
+
+  },
+  smallButton: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: theme.spacing(2),
+    width: theme.spacing(10),
 
   },
   updateButton: {

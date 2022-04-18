@@ -21,6 +21,7 @@ import { Tzoer, TzoerGQL } from 'types/tzoer';
 import { ADD_TZOER, DELETE_ALL_TZOERS } from 'mutations/tzoerMutation';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import { Chip, Drawer } from '@material-ui/core';
+import auth from 'common/auth';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement },
@@ -29,11 +30,14 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+
 const SettingsFab: FC = (): any => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [addTzoerArray, { data, loading, error }] = useMutation(ADD_TZOER);
   const [deleteAllTzoers] = useMutation(DELETE_ALL_TZOERS);
+  const [openReset, setOpenReset] = React.useState(false);
+  const loggedTzoer: Tzoer = auth.getLoggedTzoer();
 
   const handleResetTzoers = () => {
     deleteAllTzoers();
@@ -65,10 +69,14 @@ const SettingsFab: FC = (): any => {
 
   }
 
-  const toggleDrawer = () => (
-    setOpen(!open)
-  )
+  const toggleDrawer = () => {
+    setOpen(!open);
+    setOpenReset(false);
+  }
 
+  const toggleReset = () => {
+    setOpenReset(!openReset)
+  }
 
 
   return (
@@ -103,29 +111,61 @@ const SettingsFab: FC = (): any => {
                       className={classes.button}
                       startIcon={<CloudUploadIcon />}
                     >
-                      Upload
+                      <Typography className={classes.buttontitel} >הוספת צוערים</Typography>
                     </Button>
                   </ label>
-
                 </div>
+                <Divider />
+
                 <div className={classes.importContainer}>
                   <Button
                     variant="contained"
                     color="secondary"
                     className={classes.button}
                     startIcon={<DeleteSweepIcon />}
-                    onClick={handleResetTzoers}
+                    onClick={toggleReset}
                   >
-                    Reset
+                    <Typography className={classes.buttontitel} >איפוס צוערים</Typography>
                   </Button>
                 </div>
+                {openReset ? (
+                  <div >
+                    <div className={classes.importContainer}>
+                      <Typography className={classes.drawerTitel} >האם לאפס את כל הצוערים?</Typography>
+                    </ div>
+                    <div className={classes.importContainer}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.smallButton}
+                        onClick={handleResetTzoers}
+                      >
+                        <Typography>אישור!</Typography>
+
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        className={classes.smallButton}
+                        onClick={toggleReset}
+                      >
+                        <Typography >ביטול!</Typography>
+                      </Button>
+                    </div>
+                  </div>
+
+                ) : (
+                  <div>
+                  </div>
+                )}
+
               </div>
             </div>
           </Drawer>
-        </React.Fragment>
-      </div>
+        </React.Fragment >
+      </div >
+    </div >
 
-    </div>
   );
 }
 

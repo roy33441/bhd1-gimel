@@ -31,7 +31,7 @@ const SchedulePreview: FC = (): JSX.Element => {
     onCompleted: (data) => setSchedule(data.teamSchedule[0].schedule)
   });
 
- 
+
   const toggleDrawer = () => {
     setOpen(!open)
   }
@@ -42,7 +42,7 @@ const SchedulePreview: FC = (): JSX.Element => {
 
   const onSubmitSchedule = (currSchedule: String) => {
     toggleDrawer()
-    updateSchedule({ variables: { objects: { team_id: loggedTzoer.team.id, schedule: currSchedule} } });
+    updateSchedule({ variables: { objects: { team_id: loggedTzoer.team.id, schedule: currSchedule } } });
   }
 
   return (
@@ -50,60 +50,68 @@ const SchedulePreview: FC = (): JSX.Element => {
       <Paper className={classes.paper}>
         <div className={classes.header}>
           <Typography className={classes.title}>לו"ז צוותי</Typography>
-          <div>
-            <IconButton size="small" onClick={toggleDrawer} >
-              <EditIcon className={classes.editIcon} color="inherit" />
-            </IconButton>
-          </div>
+          {
+            (['סמפ', 'ממש', 'קהד', 'סגל'].includes(loggedTzoer.role.name)) ? (
+              <div>
+                <IconButton size="small" onClick={toggleDrawer} >
+                  <EditIcon className={classes.editIcon} color="inherit" />
+                </IconButton>
+              </div>
+            ) : (
+              <div></div>
+            )
+
+          }
+
         </div>
         <div className={classes.luz}>
           {
             schedule.split("\n").map(item => {
-              if(item != ""){
-                return(
+              if (item != "") {
+                return (
                   <div>
                     <Typography className={classes.luzItem}>{item}</Typography>
                     <Divider />
                   </div>
                 )
               }
-              
+
             }
-              
+
             )
           }
 
         </div>
       </Paper>
       <div className={classes.divDrawer}>
-          <Drawer anchor="bottom" open={open} onClose={toggleDrawer}>
-            <div className={classes.paperDrawer}>
-              <div className={classes.updateContainer}>
-                <Typography className={classes.drawerTitel} >שנעדכן את הלו"ז הצוותי?</Typography>
+        <Drawer anchor="bottom" open={open} onClose={toggleDrawer}>
+          <div className={classes.paperDrawer}>
+            <div className={classes.updateContainer}>
+              <Typography className={classes.drawerTitel} >שנעדכן את הלו"ז הצוותי?</Typography>
 
-              </ div>
-              <div className={classes.updateContainer}>
-                <TextField
-                  className={classes.textInput}
-                  id="outlined-multiline-static"
-                  multiline
-                  variant="outlined"
-                  maxRows={20}
-                  value={schedule}
-                  onChange={(event) => onCompleteSchedule(event.target.value)}
-                />
-              </div>
-              <div className={classes.updateContainer}>
-                <Chip
-                  className={classes.updateButton}
-                  color='primary'
-                  label='!עדכן עכשיו'
-                  onClick={ () => onSubmitSchedule(schedule)}
-                />
-              </div>
+            </ div>
+            <div className={classes.updateContainer}>
+              <TextField
+                className={classes.textInput}
+                id="outlined-multiline-static"
+                multiline
+                variant="outlined"
+                maxRows={20}
+                value={schedule}
+                onChange={(event) => onCompleteSchedule(event.target.value)}
+              />
             </div>
+            <div className={classes.updateContainer}>
+              <Chip
+                className={classes.updateButton}
+                color='primary'
+                label='!עדכן עכשיו'
+                onClick={() => onSubmitSchedule(schedule)}
+              />
+            </div>
+          </div>
 
-          </Drawer>
+        </Drawer>
       </div>
     </div>
 
