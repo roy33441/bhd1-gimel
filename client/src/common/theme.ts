@@ -13,6 +13,12 @@ const theme = createTheme({
       outlined: {
         backgroundColor: `transparent !important`
       }
+    },
+    MuiDrawer: {
+      paper: {
+        borderTopLeftRadius: '15px',
+        borderTopRightRadius: '15px',
+      }
     }
   },
   palette: {

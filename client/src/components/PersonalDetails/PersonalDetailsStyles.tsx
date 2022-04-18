@@ -13,5 +13,12 @@ export const useStyles = makeStyles((theme: Theme) => ({
   roleChip: {
     width: '100%',
     fontSize: 17
+  },
+  roleContainer: {
+    marginTop: theme.spacing(-1.2),
+    marginLeft: theme.spacing(-1.2),
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 }));

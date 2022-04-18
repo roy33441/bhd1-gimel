@@ -10,8 +10,5 @@ export const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     marginTop: theme.spacing(2)
-  },
-  fab: {
-    marginRight: theme.spacing(2)
   }
 }));
