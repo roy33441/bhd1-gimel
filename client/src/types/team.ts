@@ -6,3 +6,7 @@ export interface Team {
 export interface TeamGQL {
   teams: Team[];
 }
+
+export type DropdownTeam = Team & {
+  isPluga: boolean;
+};

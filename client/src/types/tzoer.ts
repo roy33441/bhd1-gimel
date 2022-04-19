@@ -21,6 +21,10 @@ export interface TzoersTeamGQL {
   tzoersTeam: Pick<TzoerData, 'id' | 'first_name' | 'last_name'>[];
 }
 
+export type TzoerPluga = Pick<TzoerData, 'id' | 'first_name' | 'last_name'> & {
+  team_id: number;
+};
+
 export interface TzoerGQL {
   tzoer: TzoerData[];
 }

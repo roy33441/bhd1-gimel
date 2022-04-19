@@ -34,3 +34,14 @@ export const GET_TZOERS_BY_TEAM = gql`
     }
   }
 `;
+
+export const GET_TZOERS_BY_PLUGA = gql`
+  query ($pluga_id: Int!) {
+    plugaTzoers: tzoer_tzoer(where: { team: { pluga_id: { _eq: $pluga_id } } }) {
+      id
+      first_name
+      last_name
+      team_id
+    }
+  }
+`;

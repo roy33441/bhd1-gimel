@@ -11,6 +11,18 @@ export const GET_ATTENDANCE_BY_TEAM = gql`
   }
 `;
 
+export const GET_ATTENDANCE_BY_PLUGA = gql`
+  subscription ($pluga_id: Int!) {
+    attendance: tzoer_attendance(where: { tzoer: { team: { pluga_id: { _eq: $pluga_id } } } }) {
+      id
+      tzoer {
+        team_id
+      }
+      is_present
+    }
+  }
+`;
+
 export const UPSERT_ATTENDANCE = gql`
   mutation ($objects: [tzoer_attendance_insert_input!]!) {
     insert_tzoer_attendance(

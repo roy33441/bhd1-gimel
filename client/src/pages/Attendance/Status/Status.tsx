@@ -24,15 +24,16 @@ const Status: FC<StatusProps> = (props): JSX.Element => {
     props;
   const classes = useStyles();
 
+  const namedTeams: Team[] = teams.map(team => ({ ...team, name: `צוות ${team.name}` }));
+
   return (
     <Paper elevation={0} className={classes.container}>
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}></div>
-        <TeamsDropdown
-          changeSelectedTeam={changeSelectedTeam}
-          selectedTeamId={selectedTeamId}
-          teams={teams}
-        />
+        <Typography className={classes.team}>
+          {namedTeams.find(team => team.id === selectedTeamId)?.name}
+        </Typography>
+        <TeamsDropdown changeSelectedTeam={changeSelectedTeam} teams={namedTeams} />
         <div className={classes.resetButton}>
           <Typography className={classes.resetTitle}>נקה דיווח</Typography>
           <IconButton onClick={onClearAttendance} className={classes.resetIcon}>

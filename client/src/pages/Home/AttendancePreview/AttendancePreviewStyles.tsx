@@ -9,6 +9,17 @@ export const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: theme.spacing(1.5),
     textAlign: 'center'
   },
+  loadingOrErrorContainer: {
+    backgroundColor: theme.palette.primary.light,
+    width: theme.spacing(23),
+    height: theme.spacing(32),
+    borderRadius: theme.spacing(1.5),
+    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
   header: {
     display: 'flex',
     flexDirection: 'column'
@@ -16,19 +27,24 @@ export const useStyles = makeStyles((theme: Theme) => ({
   title: {
     fontSize: 21,
     fontWeight: 600,
-    marginTop: theme.spacing(0.7)
+    marginTop: theme.spacing(0.7),
+    marginBottom: theme.spacing(-1)
+  },
+  team: {
+    fontSize: 18,
+    marginRight: theme.spacing(3)
   },
   iconRoot: {
     position: 'relative',
-    left: theme.spacing(-1.5),
-    top: theme.spacing(1.5),
+    left: theme.spacing(-0.5),
+    top: theme.spacing(1),
     flex: 1
   },
   imageIcon: {
     height: '100%'
   },
   dropdown: {
-    marginTop: theme.spacing(-0.6)
+    marginRight: theme.spacing(-0.8)
   },
   circularProgressContainer: {
     width: 120,

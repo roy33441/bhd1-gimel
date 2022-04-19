@@ -8,3 +8,11 @@ export interface Attendance {
 export interface AttendanceGQL {
   attendance: Attendance[];
 }
+
+export interface PreviewAttendance {
+  id: number;
+  tzoer: {
+    team_id: number;
+  };
+  is_present: boolean;
+}

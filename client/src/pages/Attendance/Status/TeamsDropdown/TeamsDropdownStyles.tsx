@@ -10,8 +10,5 @@ export const useStyles = makeStyles((theme: Theme) => ({
   button: {
     marginTop: -10,
     color: '#000000'
-  },
-  team: {
-    fontSize: 18
   }
 }));

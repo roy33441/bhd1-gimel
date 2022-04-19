@@ -17,6 +17,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
     flex: 1,
     textAlign: 'end'
   },
+  team: {
+    fontSize: 18,
+    marginTop: theme.spacing(1)
+  },
   resetTitle: {
     color: '#7B8C7D',
     fontSize: 9
