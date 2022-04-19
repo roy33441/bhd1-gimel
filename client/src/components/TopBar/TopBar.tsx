@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import Icon from '@material-ui/core/Icon';
-
 import PersonalDetails from 'components/PersonalDetails/PersonalDetails';
 import { useStyles } from './TopBarStyles';
 import { Tzoer } from 'types/tzoer';

@@ -20,9 +20,6 @@ const Home: FC = (): JSX.Element => {
       <div className={classes.bottomContainer}>
         <MyTasks />
       </div>
-      <div className={classes.fab}>
-        <SettingsFab />
-      </div>
     </>
   );
 };

@@ -7,48 +7,21 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
-import SettingsIcon from '@material-ui/icons/Settings';
 import Slide from '@material-ui/core/Slide';
+import { useStyles } from './SettingsFabStyles';
 import { TransitionProps } from '@material-ui/core/transitions';
-import { Fab } from '@material-ui/core';
 import * as XLSX from "xlsx";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    appBar: {
-      position: 'relative',
-      direction: 'rtl'
-    },
-    title: {
-      marginLeft: theme.spacing(2),
-      flex: 1,
-    },
-    input: {
-      display: 'none',
-    },
-  }),
-);
-
-const readUploadFile = () => {
-  // e.preventDefault();
-  // if (e.target.files) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //         const data = e.target.result;
-  //         const workbook = xlsx.read(data, { type: "array" });
-  //         const sheetName = workbook.SheetNames[0];
-  //         const worksheet = workbook.Sheets[sheetName];
-  //         const json = xlsx.utils.sheet_to_json(worksheet);
-  //         console.log(json);
-  //     };
-  //     reader.readAsArrayBuffer(e.target.files[0]);
-  // }
-}
+import { useMutation } from '@apollo/client';
+import { Tzoer, TzoerGQL } from 'types/tzoer';
+import { ADD_TZOER, DELETE_ALL_TZOERS } from 'mutations/tzoerMutation';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import { Chip, Drawer } from '@material-ui/core';
+import auth from 'common/auth';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement },
@@ -57,19 +30,18 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+
 const SettingsFab: FC = (): any => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [addTzoerArray, { data, loading, error }] = useMutation(ADD_TZOER);
+  const [deleteAllTzoers] = useMutation(DELETE_ALL_TZOERS);
+  const [openReset, setOpenReset] = React.useState(false);
+  const loggedTzoer: Tzoer = auth.getLoggedTzoer();
 
-  const xlsx = require('xlsx');
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleResetTzoers = () => {
+    deleteAllTzoers();
+  }
 
   const readFile = (file: File) => {
     let reader = new FileReader();
@@ -79,54 +51,121 @@ const SettingsFab: FC = (): any => {
       const workbook = XLSX.read(e.target.result, { type: 'buffer' });
       const worksheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[worksheetName];
-      const data = XLSX.utils.sheet_to_json(worksheet);
+      const data: any = XLSX.utils.sheet_to_json(worksheet);
+      insertTzoerArray(data)
     }
   }
 
+  const insertTzoerArray = (tzoerArray: any) => {
+    var newTzoerArray: any = [];
+    tzoerArray.map((currTzoer: any, key: any) => {
+      const tzoer: Tzoer = {
+        ...currTzoer,
+        personal_id: String(currTzoer.personal_id),
+        password: String("Aa" + currTzoer.personal_id + "!")
+      }
+      newTzoerArray.push(tzoer);
+    });
+
+  }
+
+  const toggleDrawer = () => {
+    setOpen(!open);
+    setOpenReset(false);
+  }
+
+  const toggleReset = () => {
+    setOpenReset(!openReset)
+  }
 
 
   return (
     <div>
-      <Fab color="secondary" aria-label="add" onClick={handleClickOpen}>
-        <SettingsIcon />
-      </Fab>
-      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              הגדרות
-            </Typography>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <List>
-          <ListItem button>
-            <ListItemText primary="איפוס צוערים" secondary="איפוס של כל הצוערים" />
-          </ListItem>
-          <Divider />
-          <ListItem button>
-            <input
-              className={classes.input}
-              id="contained-button-file"
-              type="file"
-              onChange={(event: any) => {
-                const file: File = event.target.files[0];
-                readFile(file);
-              }}
-            />
-            <label htmlFor="contained-button-file">
-              <Button variant="contained" color="primary" component="span">
-                Upload
-              </Button>
-            </label>
-            <ListItemText primary="העלת צוערים" secondary="העלת קובץ אקסל" />
+      <IconButton onClick={toggleDrawer}>
+        <img className={classes.imageIcon} src='icons/userManagement.svg' alt='icon' />
+      </IconButton>
+      <div>
+        <React.Fragment>
+          <Drawer anchor="bottom" open={open} onClose={toggleDrawer}>
+            <div>
+              <div className={classes.paperDrawer}>
+                <div className={classes.importContainer}>
+                  <Typography className={classes.drawerTitel} >רוצים להוסיף צוערים?</Typography>
+                </ div>
+                <div className={classes.importContainer}>
+                  <input
+                    className={classes.input}
+                    id="button-file"
+                    accept=".xlsx"
+                    type="file"
+                    onChange={(event: any) => {
+                      const file: File = event.target.files[0];
+                      readFile(file);
+                    }}
+                  />
+                  <label htmlFor="button-file">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      component="span"
+                      className={classes.button}
+                      startIcon={<CloudUploadIcon />}
+                    >
+                      <Typography className={classes.buttontitel} >הוספת צוערים</Typography>
+                    </Button>
+                  </ label>
+                </div>
+                <Divider />
 
-          </ListItem>
-        </List>
-      </Dialog>
-    </div>
+                <div className={classes.importContainer}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                    startIcon={<DeleteSweepIcon />}
+                    onClick={toggleReset}
+                  >
+                    <Typography className={classes.buttontitel} >איפוס צוערים</Typography>
+                  </Button>
+                </div>
+                {openReset ? (
+                  <div >
+                    <div className={classes.importContainer}>
+                      <Typography className={classes.drawerTitel} >האם לאפס את כל הצוערים?</Typography>
+                    </ div>
+                    <div className={classes.importContainer}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.smallButton}
+                        onClick={handleResetTzoers}
+                      >
+                        <Typography>אישור!</Typography>
+
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        className={classes.smallButton}
+                        onClick={toggleReset}
+                      >
+                        <Typography >ביטול!</Typography>
+                      </Button>
+                    </div>
+                  </div>
+
+                ) : (
+                  <div>
+                  </div>
+                )}
+
+              </div>
+            </div>
+          </Drawer>
+        </React.Fragment >
+      </div >
+    </div >
+
   );
 }
 

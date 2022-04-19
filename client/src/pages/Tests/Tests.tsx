@@ -44,7 +44,7 @@ const Tests: FC = (): JSX.Element => {
       </div>
     );
   }
-
+  
   const scoredTestsIds: number[] = scoredTestsData.scoredTests.map(test => test.id);
   const tests: Test[] = testsData.allTests.map(test => ({
     ...test,
