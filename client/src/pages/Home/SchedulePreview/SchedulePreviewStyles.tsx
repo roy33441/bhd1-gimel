@@ -11,7 +11,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   editIcon: {
     color: 'white',
-
   },
   header: {
     backgroundColor: '#F24C00',
@@ -25,11 +24,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
     
   },
   loaderContainer: {
-    height: '80vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    height: theme.spacing(27)
   },
   title: {
     fontSize: 15,
@@ -68,6 +67,13 @@ export const useStyles = makeStyles((theme: Theme) => ({
     margin: 10
 
   },
+  loaderErrorContainer: {
+    height: '30vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
   divDrawer: {
     backgroundColor: '#D4D8EC',
     borderTopLeftRadius: theme.spacing(1.5),
@@ -75,9 +81,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 
   },
   updateButton: {
-    borderRadius: theme.spacing(2),
-    padding: theme.spacing(2.5),
-    width: theme.spacing(30),
+    borderRadius: theme.spacing(3),
+    padding: theme.spacing(1.5),
+    width: theme.spacing(17),
   },
   textInput: {
     width: theme.spacing(40),
