@@ -18,7 +18,11 @@ const SchedulePreview: FC = (): JSX.Element => {
   const loggedTzoer: Tzoer = auth.getLoggedTzoer();
   const [open, setOpen] = useState(false);
   const [schedule, setSchedule] = useState<String>('');
-  const [updateSchedule, { data, loading, error }] = useMutation(UPDATE_SCHEDULE);
+  const [updateSchedule, {
+    data: updateScheduleData,
+    loading: updateScheduleLoading,
+    error: updateScheduleError
+  }] = useMutation(UPDATE_SCHEDULE);
   const { data: scheduleData, loading: loadingScheduleData } = useQuery<
     ScheduleGQL,
     {
@@ -31,6 +35,14 @@ const SchedulePreview: FC = (): JSX.Element => {
     onCompleted: (data) => setSchedule(data.teamSchedule[0].schedule)
   });
 
+
+  // if (!scheduleData) {
+  //   return (
+  //     <div className={classes.loaderErrorContainer}>
+  //       <Typography>שגיאה בטעינת הב"בים</Typography>
+  //     </div>
+  //   );
+  // }
 
   const toggleDrawer = () => {
     setOpen(!open)
@@ -66,19 +78,25 @@ const SchedulePreview: FC = (): JSX.Element => {
         </div>
         <div className={classes.luz}>
           {
-            schedule.split("\n").map(item => {
-              if (item != "") {
-                return (
-                  <div>
-                    <Typography className={classes.luzItem}>{item}</Typography>
-                    <Divider />
-                  </div>
-                )
-              }
-
-            }
-
-            )
+            loadingScheduleData ? (
+              <div className={classes.loaderErrorContainer}>
+                <CircularProgress size={30} color='primary' />
+              </div>
+            ) : (
+              <div>
+                {
+                  schedule.split("\n").map(item => {
+                    if (item != "") {
+                      return (
+                        <div>
+                          <Typography className={classes.luzItem}>{item}</Typography>
+                          <Divider />
+                        </div>
+                      )
+                    }
+                  })
+                }
+              </div>)
           }
 
         </div>
@@ -88,7 +106,6 @@ const SchedulePreview: FC = (): JSX.Element => {
           <div className={classes.paperDrawer}>
             <div className={classes.updateContainer}>
               <Typography className={classes.drawerTitel} >שנעדכן את הלו"ז הצוותי?</Typography>
-
             </ div>
             <div className={classes.updateContainer}>
               <TextField

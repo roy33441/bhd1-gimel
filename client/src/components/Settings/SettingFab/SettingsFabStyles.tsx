@@ -3,9 +3,10 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   
-  title: {
-    marginLeft: theme.spacing(2),
-    flex: 1,
+  infoTitle: {
+    margin: theme.spacing(0.5),
+    fontSize: 13,
+    color: "#F24C00"
   },
   input: {
     display: 'none',
@@ -33,20 +34,30 @@ export const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     margin: 8,
     fontWeight: 600,
-    fontSize: 20,
-    
+    fontSize: 18,
+  },
+  resetTitel:{
+    margin: 8,
+    marginTop: 19,
+    fontWeight: 600,
+    fontSize: 17,
   },
   buttontitel: {
-    justifyContent: 'center',
-    display: 'flex',
-    alignItems: 'center',
-    margin: 8,
-    fontSize: 18,
+    color: 'black',
+    fontSize: 16,
   },
   importContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  infoContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: "primary",
+    fontSize: 10
+    // margin: theme.spacing(5)
   },
   divDrawer: {
     backgroundColor: '#D4D8EC',
@@ -58,17 +69,19 @@ export const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: theme.spacing(2),
-    width: theme.spacing(25),
-
+    direction: 'ltr',
+    width: theme.spacing(24.5),
+  },
+  alert: {
+    marginTop: theme.spacing(1)
   },
   smallButton: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     margin: theme.spacing(2),
     width: theme.spacing(10),
-
+    borderRadius: theme.spacing(3),
   },
   updateButton: {
     fontSize: 25,
