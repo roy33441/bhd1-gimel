@@ -15,6 +15,8 @@ import { useLazyQuery } from '@apollo/client/react/hooks/useLazyQuery';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Snackbar from '@material-ui/core/Snackbar';
+import CopyrightIcon from '@material-ui/icons/Copyright';
+import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from './LoginStyles';
 import { LOGIN_TZOER } from 'queries/tzoerQueries';
@@ -148,6 +150,13 @@ const Login: FC = (): JSX.Element => {
           )}
         </ListItem>
       </List>
+      <div className={classes.copyRightContainer}>
+        <div className={classes.copyRightHeader}>
+          <CopyrightIcon />
+          <Typography className={classes.copyRightTitle}>פותח ע"י צוערי מעוז 76</Typography>
+        </div>
+        <Typography>תום בן ארויה, יואל פבלובסקי, רן שליטין</Typography>
+      </div>
       <Snackbar open={errorLogin} autoHideDuration={2500} onClose={() => setErrorLogin(false)}>
         <Alert severity='warning'>שם משתמש או סיסמא אינם נכונים</Alert>
       </Snackbar>

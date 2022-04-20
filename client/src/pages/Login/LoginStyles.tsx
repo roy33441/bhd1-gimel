@@ -29,5 +29,21 @@ export const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: theme.spacing(2),
     padding: theme.spacing(2.5),
     width: '70%'
+  },
+  copyRightContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
+    alignItems: 'center'
+  },
+  copyRightHeader: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  copyRightTitle: {
+    fontWeight: 600
   }
 }));
