@@ -43,5 +43,15 @@ export const useStyles = makeStyles((theme: Theme) => ({
   startButton: {
     fontSize: 17,
     border: '3px solid'
+  },
+  statusContainer: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  status: {
+    fontSize: 15
+  },
+  imageIcon: {
+    height: '100%'
   }
 }));

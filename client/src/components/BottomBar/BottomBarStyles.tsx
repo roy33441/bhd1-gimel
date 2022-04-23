@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
   BottomBar: {
     backgroundColor: theme.palette.warning.main,
     width: '100%',
-    position: 'absolute',
+    position: 'fixed',
     bottom: 0
   },
   imageIcon: {

@@ -9,6 +9,15 @@ const theme = createTheme({
     MuiChip: {
       root: {
         direction: 'ltr'
+      },
+      outlined: {
+        backgroundColor: `transparent !important`
+      }
+    },
+    MuiDrawer: {
+      paper: {
+        borderTopLeftRadius: '15px',
+        borderTopRightRadius: '15px',
       }
     }
   },
