@@ -15,7 +15,7 @@ const wsLink = new WebSocketLink({
 });
 
 const httpLink = new HttpLink({
-  uri: `http://${process.env.REACT_APP_HASURA_URI}/v1/graphql`,
+  uri: `https://${process.env.REACT_APP_HASURA_URI}/v1/graphql`,
   headers: {
     'x-hasura-admin-secret': process.env.REACT_APP_HASURA_ADMIN_SECRET
   }
