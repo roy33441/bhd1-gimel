@@ -19,6 +19,11 @@ const theme = createTheme({
         borderTopLeftRadius: '15px',
         borderTopRightRadius: '15px',
       }
+    },
+    MuiCheckbox: {
+       colorPrimary: {
+         color: "#485696"
+       }
     }
   },
   palette: {
@@ -45,7 +50,7 @@ const theme = createTheme({
     },
     background: {
       default: '#E7E7E7'
-    }
+    },
   }
 });
 

@@ -65,7 +65,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 10
-
   },
   loaderErrorContainer: {
     height: '30vh',
@@ -78,7 +77,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: '#D4D8EC',
     borderTopLeftRadius: theme.spacing(1.5),
     borderTopRightRadius: theme.spacing(1.5),
-
   },
   updateButton: {
     borderRadius: theme.spacing(3),

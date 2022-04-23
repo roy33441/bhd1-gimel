@@ -91,7 +91,7 @@ const SchedulePreview: FC = (): JSX.Element => {
           ) : (
             <div>
               {schedule.split('\n').map(item => {
-                if (item != '') {
+                if (item !== '') {
                   return (
                     <div>
                       <Typography className={classes.luzItem}>{item}</Typography>
