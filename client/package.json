@@ -6,6 +6,7 @@
     "@apollo/client": "^3.5.10",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -14,12 +15,15 @@
     "@types/react": "^16.14.24",
     "@types/react-dom": "^16.9.14",
     "graphql": "^16.3.0",
+    "graphql-ws": "^5.7.0",
     "jss-rtl": "^0.3.0",
     "react": "^18.0.0",
+    "react-circular-progressbar": "^2.0.4",
     "react-dom": "^18.0.0",
     "react-jss": "^10.9.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.0",
+    "subscriptions-transport-ws": "^0.11.0",
     "typescript": "^4.6.3",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.4",
@@ -33,7 +37,8 @@
     "workbox-range-requests": "^5.1.4",
     "workbox-routing": "^5.1.4",
     "workbox-strategies": "^5.1.4",
-    "workbox-streams": "^5.1.4"
+    "workbox-streams": "^5.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",
