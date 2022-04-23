@@ -25,10 +25,7 @@ const SchedulePreview: FC = (): JSX.Element => {
   const loggedTzoer: Tzoer = auth.getLoggedTzoer();
   const [open, setOpen] = useState(false);
   const [schedule, setSchedule] = useState<String>('');
-  const [
-    updateSchedule,
-    { data: updateScheduleData, loading: updateScheduleLoading, error: updateScheduleError }
-  ] = useMutation(UPDATE_SCHEDULE);
+  const [updateSchedule] = useMutation(UPDATE_SCHEDULE);
   const { data: scheduleData, loading: loadingScheduleData } = useSubscription<
     ScheduleGQL,
     {
@@ -43,15 +40,31 @@ const SchedulePreview: FC = (): JSX.Element => {
     }
   });
 
-  // if (!scheduleData) {
-  //   return (
-  //     <div className={classes.loaderErrorContainer}>
-  //       <Typography>שגיאה בטעינת הב"בים</Typography>
-  //     </div>
-  //   );
-  // }
+  if (loadingScheduleData) {
+    return (
+      <Paper className={classes.paper}>
+         <div className={classes.header}>
+          <Typography className={classes.title}>לו"ז צוותי</Typography>
+        </div>
+        <div className={classes.loaderErrorContainer}>
+          <CircularProgress size={20} color='primary' />
+        </div>
+      </Paper>
+    );
+  }
 
-  // setSchedule(data.teamSchedule[0].schedule)
+  if (!scheduleData) {
+    return (
+      <Paper className={classes.paper}>
+        <div className={classes.header}>
+          <Typography className={classes.title}>לו"ז צוותי</Typography>
+        </div>
+        <div className={classes.loaderErrorContainer}>
+          <Typography>שגיאה בטעינת הב"בים</Typography>
+        </div>
+      </Paper>
+    )
+  }
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -73,7 +86,7 @@ const SchedulePreview: FC = (): JSX.Element => {
       <Paper className={classes.paper}>
         <div className={classes.header}>
           <Typography className={classes.title}>לו"ז צוותי</Typography>
-          {['סמפ', 'ממש', 'קהד', 'סגל'].includes(loggedTzoer.role.name) ? (
+          {auth.editSchedulePermissions.includes(loggedTzoer.role.name) ? (
             <div>
               <IconButton size='small' onClick={toggleDrawer}>
                 <EditIcon className={classes.editIcon} color='inherit' />
@@ -84,24 +97,16 @@ const SchedulePreview: FC = (): JSX.Element => {
           )}
         </div>
         <div className={classes.luz}>
-          {loadingScheduleData ? (
-            <div className={classes.loaderErrorContainer}>
-              <CircularProgress size={30} color='primary' />
-            </div>
-          ) : (
-            <div>
-              {schedule.split('\n').map(item => {
-                if (item != '') {
-                  return (
-                    <div>
-                      <Typography className={classes.luzItem}>{item}</Typography>
-                      <Divider />
-                    </div>
-                  );
-                }
-              })}
-            </div>
-          )}
+          {schedule.split('\n').map(item => {
+            if (item != '') {
+              return (
+                <div>
+                  <Typography key={item} className={classes.luzItem}>{item}</Typography>
+                  <Divider />
+                </div>
+              );
+            }
+          })}
         </div>
       </Paper>
       <div className={classes.divDrawer}>

@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import auth from 'common/auth';
 import { useHistory } from 'react-router';
 import { useStyles } from './PersonalDetailsStyles';
-import SettingsFab from 'components/Settings/SettingFab/SettingsFab';
+import TzoerSettings from 'components/Settings/SettingFab/TzoerSettings';
 import { Tzoer } from 'types/tzoer';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { IconButton } from '@material-ui/core';
@@ -43,7 +43,7 @@ const PersonalDetails: FC<PersonalDetailsProps> = (props): JSX.Element => {
       <div className={classes.roleContainer}>
         <Chip size='small' className={classes.roleChip} color='primary' label={role} />
         {
-          (['סמפ', 'סגל'].includes(loggedTzoer.role.name)) ? (<SettingsFab />) : (<div></div>)
+          (auth.addOrDeleteTzoerPermissions.includes(loggedTzoer.role.name)) ? (<TzoerSettings />) : (<div></div>)
         }
       </div>
 

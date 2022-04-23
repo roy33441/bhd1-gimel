@@ -11,5 +11,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   roleChip: {
     width: '100%'
+  },
+  drawerContainer: {
+    backgroundColor: '#D4D8EC'
   }
 }));
