@@ -12,3 +12,9 @@ export interface TestGQL {
 export type Test = TestData & {
   isFinished: boolean;
 };
+
+export interface Status {
+  id: number;
+  name: string;
+  iconURL: string;
+}

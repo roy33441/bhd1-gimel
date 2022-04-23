@@ -12,10 +12,6 @@ import { useStyles } from './TestsStyles';
 import { Tzoer } from 'types/tzoer';
 import auth from 'common/auth';
 
-interface GetScoredTestsVars {
-  personal_id: string;
-}
-
 const Tests: FC = (): JSX.Element => {
   const loggedTzoer: Tzoer = auth.getLoggedTzoer();
   const classes = useStyles();
@@ -23,10 +19,10 @@ const Tests: FC = (): JSX.Element => {
   const { data: testsData, loading: loadingAllTests } = useQuery<TestGQL>(GET_TESTS);
   const { data: scoredTestsData, loading: loadingscoredTests } = useQuery<
     ScoreGQL,
-    GetScoredTestsVars
+    { tzoer_id: number }
   >(GET_SCORED_TESTS_BY_PERSONAL_ID, {
     variables: {
-      personal_id: loggedTzoer.personal_id
+      tzoer_id: loggedTzoer.id
     }
   });
 
@@ -44,22 +40,25 @@ const Tests: FC = (): JSX.Element => {
       </div>
     );
   }
-  
-  const scoredTestsIds: number[] = scoredTestsData.scoredTests.map(test => test.id);
+
+  const scoredTestsIds: number[] = scoredTestsData.scoredTests.map(test => test.test_id);
   const tests: Test[] = testsData.allTests.map(test => ({
     ...test,
-    isFinished: scoredTestsIds.includes(test.id)
+    isFinished: scoredTestsIds.findIndex(scoredTestId => scoredTestId === test.id) !== -1
   }));
+
+  const sortedTests: Test[] = [...tests].sort(({ isFinished }) => (isFinished ? 1 : -1));
 
   return (
     <List className={classes.testsList}>
-      {tests.map(test => (
+      {sortedTests.map(test => (
         <TestCard
+          id={test.id}
           key={test.id}
           title={test.title}
           numOfQuestions={test.questions_number}
           link={test.form_url}
-          isFinished={test.isFinished}
+          isScored={test.isFinished}
         />
       ))}
     </List>
