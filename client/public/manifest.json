@@ -1,8 +1,14 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [],
-  "start_url": ".",
+  "short_name": "Tzoer",
+  "name": "Tzoer App",
+  "icons": [
+    {
+      "src": "/icons/logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "83x76"
+    }
+  ],
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
