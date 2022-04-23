@@ -3,7 +3,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
 
 const wsLink = new WebSocketLink({
-  uri: `ws://${process.env.REACT_APP_HASURA_URI}/v1/graphql`, // use wss for a secure endpoint
+  uri: `wss://${process.env.REACT_APP_HASURA_URI}/v1/graphql`, // use wss for a secure endpoint
   options: {
     reconnect: true,
     connectionParams: {
