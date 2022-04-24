@@ -7,6 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import RotateLeftOutlinedIcon from '@material-ui/icons/RotateLeftOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom'
 import Slide from '@material-ui/core/Slide';
 import { useStyles } from './TzoerSettingsStyles';
 import { TransitionProps } from '@material-ui/core/transitions';
@@ -147,8 +148,12 @@ const TzoerSettings: FC = (): any => {
                       <Typography className={classes.drawerTitel} >רוצים להוסיף צוערים?</Typography>
                     </ div>
                     <div className={classes.infoContainer}>
+
                       <InfoOutlinedIcon color="primary" />
-                      <Typography className={classes.infoTitle} >מה צריך להיות אקסל? תלחצו ממש כאן!!</Typography>
+                      <Typography  className={classes.infoTitle} >מה צריך להיות אקסל?!!</Typography>
+                      <Link className={classes.infoTitle} to="/files/תבנית_להוספת_צוערים.xlsx" target="_blank" download>
+                      תלחצו ממש כאן
+                    </Link>
                     </ div>
                     <div className={classes.importContainer}>
                       <input
@@ -175,64 +180,64 @@ const TzoerSettings: FC = (): any => {
                     </div>
                     <Divider variant="middle" />
                   </div>
-                ) : (
-                  <div />
-                )
+              ) : (
+              <div />
+              )
                 }
-                <div>
+              <div>
+                <div className={classes.importContainer}>
+                  <Typography className={classes.resetTitel} >מחזור חדש? כדאי לאפס את הצוערים!</Typography>
+                </ div>
+                <div className={classes.importContainer}>
+
+                  <Button
+                    className={classes.button}
+                    startIcon={<RotateLeftOutlinedIcon />}
+                    onClick={toggleReset}
+                    disabled={openReset}
+                  >
+                    <Typography className={classes.buttontitel} >איפוס צוערים</Typography>
+                  </Button>
+
+                </div>
+              </div>
+
+              {openReset ? (
+                <div >
                   <div className={classes.importContainer}>
-                    <Typography className={classes.resetTitel} >מחזור חדש? כדאי לאפס את הצוערים!</Typography>
+                    <InfoOutlinedIcon color="primary" />
+                    <Typography className={classes.infoTitle} >שים לב! פעולה זו תאפס את כל הצוערים!</Typography>
                   </ div>
                   <div className={classes.importContainer}>
-
                     <Button
-                      className={classes.button}
-                      startIcon={<RotateLeftOutlinedIcon />}
-                      onClick={toggleReset}
-                      disabled={openReset}
+                      variant="contained"
+                      color="primary"
+                      className={classes.smallButton}
+                      onClick={handleResetTzoers}
                     >
-                      <Typography className={classes.buttontitel} >איפוס צוערים</Typography>
+                      <Typography>איפוס</Typography>
                     </Button>
-
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      className={classes.smallButton}
+                      onClick={toggleReset}
+                    >
+                      <Typography >ביטול</Typography>
+                    </Button>
                   </div>
                 </div>
 
-                {openReset ? (
-                  <div >
-                    <div className={classes.importContainer}>
-                      <InfoOutlinedIcon color="primary" />
-                      <Typography className={classes.infoTitle} >שים לב! פעולה זו תאפס את כל הצוערים!</Typography>
-                    </ div>
-                    <div className={classes.importContainer}>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.smallButton}
-                        onClick={handleResetTzoers}
-                      >
-                        <Typography>איפוס</Typography>
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        className={classes.smallButton}
-                        onClick={toggleReset}
-                      >
-                        <Typography >ביטול</Typography>
-                      </Button>
-                    </div>
-                  </div>
+              ) : (
+                <div></div>
+              )}
+              <Divider variant="middle" />
 
-                ) : (
-                  <div></div>
-                )}
-                <Divider variant="middle" />
-
-              </div>
             </div>
-          </Drawer>
-        </React.Fragment >
-      </div >
+          </div>
+        </Drawer>
+      </React.Fragment >
+    </div >
     </div >
 
   );

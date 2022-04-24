@@ -6,7 +6,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
   infoTitle: {
     margin: theme.spacing(0.5),
     fontSize: 13,
-    color: "#F24C00"
+    color: "#F24C00",
+    textDecoration: 'inherit'
   },
   input: {
     display: 'none',
@@ -57,7 +58,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     color: "primary",
     fontSize: 10
-    // margin: theme.spacing(5)
   },
   divDrawer: {
     backgroundColor: '#D4D8EC',
