@@ -1,0 +1,25 @@
+
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+    - build
+    - deploy
+
+build_client:
+    stage: build
+    image: node:14.17.1
+    script:
+        - cd client
+        - npm install
+        - npm run build
+    only:
+        - dev
+
+deploy_client:
+    stage: deploy
+    image: node:14.17.1
+    script:
+        - git subtree push --prefix client https://$HEROKU_USER:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git main
