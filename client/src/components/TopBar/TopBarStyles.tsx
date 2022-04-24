@@ -14,5 +14,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   drawerContainer: {
     backgroundColor: '#D4D8EC'
+  },
+  iconButton: {
+    backgroundColor: 'transparent',
+    border: 'transparent'
   }
 }));

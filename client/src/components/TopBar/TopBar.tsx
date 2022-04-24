@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import IconButton from '@material-ui/core/IconButton';
 import PersonalDetails from 'components/PersonalDetails/PersonalDetails';
 import About from 'components/About/About';
 import { useStyles } from './TopBarStyles';
@@ -18,9 +17,9 @@ const TopBar: FC = (): JSX.Element => {
         role={loggedTzoer.role.name}
       />
       <div>
-        <IconButton onClick={() => setOpenDrawer(true)}>
+        <button className={classes.iconButton} onClick={() => setOpenDrawer(true)}>
           <img src='icons/logo.svg' alt='logo' />
-        </IconButton>
+        </button>
       </div>
       <Drawer anchor="bottom" open={openDrawer} onClose={() => setOpenDrawer(false)}>
         <div className={classes.drawerContainer}>
