@@ -4,7 +4,7 @@ import ButtonsGroup from 'pages/Home/ButtonsGroup/ButtonsGroup';
 import AttendancePreview from 'pages/Home/AttendancePreview/AttendancePreview';
 import SchedulePreview from 'pages/Home/SchedulePreview/SchedulePreview';
 import { useStyles } from './HomeStyles';
-import MyTasks from 'pages/Home/MyTasks/MyTasks';
+import MyTasks from 'pages/Home/TeamTasks/TeamTasks';
 
 const Home: FC = (): JSX.Element => {
   const classes = useStyles();
