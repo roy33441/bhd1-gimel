@@ -26,7 +26,7 @@ const DeveloperCard: FC<DeveloperCardProps> = (props): JSX.Element => {
     }
     return (
         <div className={classes.card}>
-            <img  onClick={openSiteTab}className={classes.avatar} src={imgURL} alt="Avatar" />
+            <img  onClick={openSiteTab} className={classes.avatar} src={imgURL} alt="Avatar" />
             <div>
                 <Typography className={classes.cardTitel}>
                     {name}
