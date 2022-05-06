@@ -91,7 +91,7 @@ const Login: FC = (): JSX.Element => {
         <img className={classes.imageIcon} src='icons/logo.svg' alt='logo' />
         <ListItem className={classes.root}>
           <FormControl className={classes.textField}>
-            <InputLabel htmlFor='standard-adornment-password'>תעודת זהות</InputLabel>
+            <InputLabel htmlFor='standard-adornment-password'>שם משתמש</InputLabel>
             <Input
               id='standard-adornment-password'
               value={values.id}
