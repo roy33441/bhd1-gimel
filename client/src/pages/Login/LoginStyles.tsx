@@ -22,7 +22,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
     margin: theme.spacing(1)
   },
   imageIcon: {
-    width: '70%'
+    borderRadius: '50%'
+
   },
   loginButton: {
     fontSize: 23,

@@ -9,10 +9,11 @@ const isLoggedTzoer = (): boolean => !!localStorage.getItem('loggedTzoer');
 
 const removeLoggedTzoer = (): void => localStorage.removeItem('loggedTzoer');
 
-const addOrDeleteTzoerPermissions = ['מנהל', 'סגל']
-const editSchedulePermissions = ['מנהל', 'סמפ', 'ממש', 'קהד', 'סגל']
+const adminPermissions = ['מנהל', 'סגל']
+const editSchedulePermissions = ['מנהל', 'מהמ', 'ממש', 'סגל']
+const tzoerPermissions = ['צוער',]
 
-const auth = { saveLoggedTzoer, getLoggedTzoer, removeLoggedTzoer, isLoggedTzoer, addOrDeleteTzoerPermissions, editSchedulePermissions };
+const auth = { saveLoggedTzoer, getLoggedTzoer, removeLoggedTzoer, isLoggedTzoer, adminPermissions, editSchedulePermissions, tzoerPermissions };
 
 
 export default auth;

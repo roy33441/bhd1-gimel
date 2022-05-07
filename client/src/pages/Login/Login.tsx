@@ -88,7 +88,7 @@ const Login: FC = (): JSX.Element => {
   return (
     <>
       <List className={classes.container}>
-        <img className={classes.imageIcon} src='icons/logo.svg' alt='logo' />
+        <img className={classes.imageIcon} src='icons/tikshuv.jpeg' alt='logo' />
         <ListItem className={classes.root}>
           <FormControl className={classes.textField}>
             <InputLabel htmlFor='standard-adornment-password'>שם משתמש</InputLabel>

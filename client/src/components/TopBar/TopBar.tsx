@@ -4,7 +4,7 @@ import About from 'components/About/About';
 import { useStyles } from './TopBarStyles';
 import { Tzoer } from 'types/tzoer';
 import auth from 'common/auth';
-import { Drawer } from '@material-ui/core';
+import { Button, Drawer } from '@material-ui/core';
 
 const TopBar: FC = (): JSX.Element => {
   const loggedTzoer: Tzoer = auth.getLoggedTzoer();
@@ -17,9 +17,9 @@ const TopBar: FC = (): JSX.Element => {
         role={loggedTzoer.role.name}
       />
       <div>
-        <button className={classes.iconButton} onClick={() => setOpenDrawer(true)}>
-          <img src='icons/logo.svg' alt='logo' />
-        </button>
+        <Button size="small" onClick={() => setOpenDrawer(true)}>
+          <img className={classes.iconButton}  src='icons/tikshuv.jpeg' alt='logo' />
+        </Button  >
       </div>
       <Drawer anchor="bottom" open={openDrawer} onClose={() => setOpenDrawer(false)}>
         <div className={classes.drawerContainer}>

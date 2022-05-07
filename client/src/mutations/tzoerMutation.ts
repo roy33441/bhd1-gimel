@@ -6,7 +6,7 @@ export const ADD_TZOER = gql`
     insert_tzoer_tzoer(
       objects: $objects
       on_conflict: {
-        constraint: tzoer_personal_number_key
+        constraint:  tzoer_personal_id_key
         update_columns: [first_name, last_name, role_id, team_id, password]
       }
     ) {

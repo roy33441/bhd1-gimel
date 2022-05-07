@@ -17,6 +17,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   iconButton: {
     backgroundColor: 'transparent',
-    border: 'transparent'
+    border: 'transparent',
+    borderRadius: '50%',
+    width: theme.spacing(9.5),
+    marginLeft: theme.spacing(0.8),
+    marginTop: theme.spacing(-0.5)
   }
 }));

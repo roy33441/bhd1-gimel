@@ -74,8 +74,8 @@ const AttendancePreview: FC = (): JSX.Element => {
 
   const namedTeams: Team[] = teams.teams.map(team => ({ ...team, name: `צוות ${team.name}` }));
   const dropdownTeams: Team[] = [
-    ...namedTeams,
-    { id: PLUGA_ID, name: `פלוגה ${loggedTzoer.pluga.name}` }
+    { id: PLUGA_ID, name: loggedTzoer.pluga.name },
+    ...namedTeams
   ];
 
   const attendanceByTeam: PreviewAttendance[] = attendance
