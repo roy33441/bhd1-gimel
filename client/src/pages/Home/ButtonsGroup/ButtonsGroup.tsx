@@ -12,7 +12,7 @@ const ButtonsGroup: FC = (): JSX.Element => {
     report: 'https://one.prat.idf.il/',
     idf: 'https://www.idf.il/',
     moodle: 'https://campus.digital.idf.il/',
-    telegramBot: 'https://t.me/BHD1_bot'
+    drive: 'https://drive.google.com/drive/folders/1GOJ1MUcvZ6DGpi_-2Hu5g8XthiKdmSYR'
   };
 
   return (
@@ -36,9 +36,9 @@ const ButtonsGroup: FC = (): JSX.Element => {
         color={theme.palette.success.light}
       />
       <LinkButton
-        siteURL={sitesURLs.telegramBot}
-        iconURL='icons/telegramBot.svg'
-        label='בוט'
+        siteURL={sitesURLs.drive}
+        iconURL='icons/googleDrive.svg'
+        label='דרייב קהד'
         color={'#BFACC8'}
       />
     </div>

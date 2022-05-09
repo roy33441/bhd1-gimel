@@ -78,7 +78,7 @@ const Tests: FC = (): JSX.Element => {
         ))}
        
       </List>
-      {(openAddCard || !(auth.addOrDeleteTzoerPermissions.includes(loggedTzoer.role.name))) ? (
+      {(openAddCard || auth.tzoerPermissions.includes(loggedTzoer.role.name)) ? (
         <div />
       ) :
         (

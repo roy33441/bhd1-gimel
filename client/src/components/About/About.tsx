@@ -1,6 +1,3 @@
-import React from 'react';
-import Badge from '@material-ui/core/Badge';
-import Avatar from '@material-ui/core/Avatar';
 import { useStyles } from './AboutStyles';
 import DeveloperCard from './DeveloperCard/DeveloperCard';
 import { Divider, Typography } from '@material-ui/core';
@@ -53,7 +50,7 @@ export default function BadgeAvatars() {
 
             <Typography className={classes.context}>
                 אפליקציית "צוער" נוסדה בשנת 2022 עבורכם, צוערי בה"ד 1.
-                האפליקצייה נועדה ליעל, לסדר ולרכז את כל המידע במקום אחד שיהיה כמה שיותר נוח ונגיש לצוער במשך ההכשרה.
+                האפליקצייה נועדה לייעל, לסדר ולרכז את כל המידע במקום אחד שיהיה כמה שיותר נוח ונגיש לצוער במשך ההכשרה.
             </ Typography>
             <Typography className={classes.titel}>
                 מי אנחנו?

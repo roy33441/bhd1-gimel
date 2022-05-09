@@ -43,7 +43,7 @@ const PersonalDetails: FC<PersonalDetailsProps> = (props): JSX.Element => {
       <div className={classes.roleContainer}>
         <Chip size='small' className={classes.roleChip} color='primary' label={role} />
         {
-          (auth.addOrDeleteTzoerPermissions.includes(loggedTzoer.role.name)) ? (<TzoerSettings />) : (<div></div>)
+          (auth.adminPermissions.includes(loggedTzoer.role.name)) ? (<TzoerSettings />) : (<div></div>)
         }
       </div>
 
