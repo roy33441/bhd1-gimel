@@ -65,7 +65,7 @@ const BottomBar: FC = (): JSX.Element => {
         className={classes.navigationAction}
         component={Link}
         to='/tests'
-        label='ב"ב'
+        label='טפסים'
         icon={testIcon}
       />
     </BottomNavigation>
