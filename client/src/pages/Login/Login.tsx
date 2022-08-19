@@ -150,13 +150,13 @@ const Login: FC = (): JSX.Element => {
           )}
         </ListItem>
       </List>
-      <div className={classes.copyRightContainer}>
+      {/* <div className={classes.copyRightContainer}>
         <div className={classes.copyRightHeader}>
           <CopyrightIcon />
           <Typography className={classes.copyRightTitle}>פותח ע"י צוערי מעוז 76</Typography>
         </div>
         <Typography>תום בן ארויה, יואל פבלובסקי, רן שליטין</Typography>
-      </div>
+      </div> */}
       <Snackbar open={errorLogin} autoHideDuration={2500} onClose={() => setErrorLogin(false)}>
         <Alert severity='warning'>שם משתמש או סיסמא אינם נכונים</Alert>
       </Snackbar>
