@@ -168,7 +168,6 @@ const Login: FC = (): JSX.Element => {
         </div>
         <Typography>תום בן ארויה, יואל פבלובסקי, רן שליטין</Typography>
       </div> */}
-
       <Snackbar
         open={errorLogin}
         autoHideDuration={2500}
