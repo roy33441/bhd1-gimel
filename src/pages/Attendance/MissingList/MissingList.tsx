@@ -24,6 +24,7 @@ const MissingList: FC<MissingListProps> = (props): JSX.Element => {
     );
   };
 
+
   return (
     <div className={classes.missingContainer}>
       <Typography className={classes.title}>חסרים</Typography>

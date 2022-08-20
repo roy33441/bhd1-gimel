@@ -1,48 +1,38 @@
 import React from 'react';
 import { FC } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Divider from '@material-ui/core/Divider';
 import RotateLeftOutlinedIcon from '@material-ui/icons/RotateLeftOutlined';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import CloseIcon from '@material-ui/icons/Close';
+import { Link } from 'react-router-dom'
 import Slide from '@material-ui/core/Slide';
-import { useStyles } from './SettingsFabStyles';
+import { useStyles } from './TzoerSettingsStyles';
 import { TransitionProps } from '@material-ui/core/transitions';
 import * as XLSX from "xlsx";
 import { useMutation } from '@apollo/client';
 import { Tzoer, TzoerGQL } from 'types/tzoer';
 import { ADD_TZOER, DELETE_ALL_TZOERS } from 'mutations/tzoerMutation';
-import { Chip, Drawer } from '@material-ui/core';
+import { Drawer } from '@material-ui/core';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Snackbar from '@material-ui/core/Snackbar';
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement },
-  ref: React.Ref<unknown>,
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
 }
 
 
-const SettingsFab: FC = (): any => {
+const TzoerSettings: FC = (): any => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openReset, setOpenReset] = React.useState(false);
   const [openAlert, setOpenAlert] = React.useState(true);
 
   const onComplete = () => {
+    console.log(addTzoerError)
+    console.log(addTzoerData)
     setOpenAlert(true)
   }
 
@@ -71,6 +61,7 @@ const SettingsFab: FC = (): any => {
       const worksheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[worksheetName];
       const data: any = XLSX.utils.sheet_to_json(worksheet);
+      console.log(data)
       insertTzoerArray(data)
     }
   }
@@ -85,6 +76,7 @@ const SettingsFab: FC = (): any => {
       }
       newTzoerArray.push(tzoer);
     });
+    console.log(newTzoerArray)
     addTzoerArray({ variables: { objects: newTzoerArray } })
     toggleDrawer()
   }
@@ -156,8 +148,12 @@ const SettingsFab: FC = (): any => {
                       <Typography className={classes.drawerTitel} >רוצים להוסיף צוערים?</Typography>
                     </ div>
                     <div className={classes.infoContainer}>
+
                       <InfoOutlinedIcon color="primary" />
-                      <Typography className={classes.infoTitle} >מה צריך להיות אקסל? תלחצו ממש כאן!!</Typography>
+                      <Typography  className={classes.infoTitle} >מה צריך להיות אקסל?!!</Typography>
+                      <Link className={classes.infoTitle} to="/files/תבנית_להוספת_צוערים.xlsx" target="_blank" download>
+                      תלחצו ממש כאן
+                    </Link>
                     </ div>
                     <div className={classes.importContainer}>
                       <input
@@ -184,67 +180,67 @@ const SettingsFab: FC = (): any => {
                     </div>
                     <Divider variant="middle" />
                   </div>
-                ) : (
-                  <div />
-                )
+              ) : (
+              <div />
+              )
                 }
-                <div>
+              <div>
+                <div className={classes.importContainer}>
+                  <Typography className={classes.resetTitel} >מחזור חדש? כדאי לאפס את הצוערים!</Typography>
+                </ div>
+                <div className={classes.importContainer}>
+
+                  <Button
+                    className={classes.button}
+                    startIcon={<RotateLeftOutlinedIcon />}
+                    onClick={toggleReset}
+                    disabled={openReset}
+                  >
+                    <Typography className={classes.buttontitel} >איפוס צוערים</Typography>
+                  </Button>
+
+                </div>
+              </div>
+
+              {openReset ? (
+                <div >
                   <div className={classes.importContainer}>
-                    <Typography className={classes.resetTitel} >מחזור חדש? כדאי לאפס את הצוערים!</Typography>
+                    <InfoOutlinedIcon color="primary" />
+                    <Typography className={classes.infoTitle} >שים לב! פעולה זו תאפס את כל הצוערים!</Typography>
                   </ div>
                   <div className={classes.importContainer}>
-
                     <Button
-                      className={classes.button}
-                      startIcon={<RotateLeftOutlinedIcon />}
-                      onClick={toggleReset}
-                      disabled={openReset}
+                      variant="contained"
+                      color="primary"
+                      className={classes.smallButton}
+                      onClick={handleResetTzoers}
                     >
-                      <Typography className={classes.buttontitel} >איפוס צוערים</Typography>
+                      <Typography>איפוס</Typography>
                     </Button>
-
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      className={classes.smallButton}
+                      onClick={toggleReset}
+                    >
+                      <Typography >ביטול</Typography>
+                    </Button>
                   </div>
                 </div>
 
-                {openReset ? (
-                  <div >
-                    <div className={classes.importContainer}>
-                      <InfoOutlinedIcon color="primary" />
-                      <Typography className={classes.infoTitle} >שים לב! פעולה זו תאפס את כל הצוערים!</Typography>
-                    </ div>
-                    <div className={classes.importContainer}>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.smallButton}
-                        onClick={handleResetTzoers}
-                      >
-                        <Typography>איפוס</Typography>
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        className={classes.smallButton}
-                        onClick={toggleReset}
-                      >
-                        <Typography >ביטול</Typography>
-                      </Button>
-                    </div>
-                  </div>
+              ) : (
+                <div></div>
+              )}
+              <Divider variant="middle" />
 
-                ) : (
-                  <div></div>
-                )}
-                <Divider variant="middle" />
-
-              </div>
             </div>
-          </Drawer>
-        </React.Fragment >
-      </div >
+          </div>
+        </Drawer>
+      </React.Fragment >
+    </div >
     </div >
 
   );
 }
 
-export default SettingsFab;
+export default TzoerSettings;

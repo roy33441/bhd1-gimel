@@ -11,5 +11,16 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   roleChip: {
     width: '100%'
+  },
+  drawerContainer: {
+    backgroundColor: '#D4D8EC'
+  },
+  iconButton: {
+    backgroundColor: 'transparent',
+    border: 'transparent',
+    borderRadius: '50%',
+    width: theme.spacing(9.5),
+    marginLeft: theme.spacing(0.8),
+    marginTop: theme.spacing(-0.5)
   }
 }));

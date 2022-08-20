@@ -68,7 +68,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
 
   },
   loaderErrorContainer: {
-    height: '30vh',
+    width: theme.spacing(17),
+    height: theme.spacing(26),
+    borderRadius: theme.spacing(1.5),
+    textAlign: 'center',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

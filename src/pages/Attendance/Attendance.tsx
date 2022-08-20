@@ -13,7 +13,7 @@ import Status from 'pages/Attendance/Status/Status';
 import NotReportedList from 'pages/Attendance/NotReportedList/NotReportedList';
 import PresentList from 'pages/Attendance/PresentList/PresentList';
 import MissingList from 'pages/Attendance/MissingList/MissingList';
-import { TeamGQL } from 'types/team';
+import { Team, TeamGQL } from 'types/team';
 import { GET_TEAMS_BY_PLUGA } from 'queries/teamsQueries';
 import auth from 'common/auth';
 import { Tzoer, TzoersTeamGQL } from 'types/tzoer';
@@ -26,6 +26,7 @@ import {
 } from 'queries/attendanceQueries';
 import { GET_TZOERS_BY_TEAM } from 'queries/tzoerQueries';
 import { useMutation } from '@apollo/client';
+import TotalAttendanceList from './TotalAttendanceList/TotalAttendanceList';
 
 type AttendanceTzoer = Pick<Tzoer, 'id' | 'first_name' | 'last_name'>;
 
@@ -34,6 +35,8 @@ type AffectedRowsGQL = {
     affected_rows: number;
   };
 };
+
+const PLUGA_ID = -1;
 
 const AttendancePage: FC = (): JSX.Element => {
   const [isEditingReport, setIsEditingReport] = useState<boolean>(false);
@@ -114,6 +117,8 @@ const AttendancePage: FC = (): JSX.Element => {
     );
   }
 
+  const dropdownTeams: Team[] = [{ id: PLUGA_ID, name: loggedTzoer.pluga.name }, ...teams.teams];
+
   const notReportedTzoers: AttendanceTzoer[] = tzoersTeam.tzoersTeam.filter(
     tzoer => !modifiedAttendance.find(tzoerAttendance => tzoerAttendance.tzoer_id === tzoer.id)
   );
@@ -162,36 +167,53 @@ const AttendancePage: FC = (): JSX.Element => {
 
   return (
     <div className={classes.container}>
-      <Status
-        onClearAttendance={() => clearAttendance({ variables: { team_id: selectedTeamId } })}
-        present={presentTzoers.length}
-        missing={missingTzoers.length}
-        total={tzoersTeam.tzoersTeam.length}
-        changeSelectedTeam={setSelectedTeamId}
-        selectedTeamId={selectedTeamId}
-        teams={teams.teams}
-      />
-      <Paper elevation={0} className={classes.mainContent}>
-        {isEditingReport && (
-          <>
-            <NotReportedList onChangeItemStatus={setModifiedAttendance} list={notReportedTzoers} />
+      {selectedTeamId === PLUGA_ID ? (
+        <>
+          <TotalAttendanceList
+            onRemoveItem={setModifiedAttendance}
+            isEditingReport={isEditingReport}
+            changeSelectedTeam={setSelectedTeamId}
+            selectedTeamId={selectedTeamId}
+            teams={dropdownTeams}
+          />
+        </>
+      ) : (
+        <>
+          <Status
+            onClearAttendance={() => clearAttendance({ variables: { team_id: selectedTeamId } })}
+            present={presentTzoers.length}
+            missing={missingTzoers.length}
+            total={tzoersTeam.tzoersTeam.length}
+            changeSelectedTeam={setSelectedTeamId}
+            selectedTeamId={selectedTeamId}
+            teams={dropdownTeams}
+          />
+          <Paper elevation={0} className={classes.mainContent}>
+            {isEditingReport && (
+              <>
+                <NotReportedList
+                  onChangeItemStatus={setModifiedAttendance}
+                  list={notReportedTzoers}
+                />
+                <Divider className={classes.divider} />
+              </>
+            )}
+            <PresentList
+              onRemoveItem={setModifiedAttendance}
+              list={presentTzoers}
+              isEditingReport={isEditingReport}
+            />
             <Divider className={classes.divider} />
-          </>
-        )}
-        <PresentList
-          onRemoveItem={setModifiedAttendance}
-          list={presentTzoers}
-          isEditingReport={isEditingReport}
-        />
-        <Divider className={classes.divider} />
-        <MissingList
-          attendanceList={modifiedAttendance}
-          onRemoveItem={setModifiedAttendance}
-          list={missingTzoers}
-          isEditingReport={isEditingReport}
-        />
-      </Paper>
-      {isEditingReport ? saveReportChip : enterEditReportChip}
+            <MissingList
+              attendanceList={modifiedAttendance}
+              onRemoveItem={setModifiedAttendance}
+              list={missingTzoers}
+              isEditingReport={isEditingReport}
+            />
+          </Paper>
+          {isEditingReport ? saveReportChip : enterEditReportChip}
+        </>
+      )}
     </div>
   );
 };

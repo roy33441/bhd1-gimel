@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { MANAGER_ROLE_ID, SEGEL_ROLE_ID } from 'common/constants';
 
 export const LOGIN_TZOER = gql`
   query ($personal_id: String!, $password: String!) {
@@ -27,7 +28,9 @@ export const LOGIN_TZOER = gql`
 
 export const GET_TZOERS_BY_TEAM = gql`
   query ($team_id: Int!) {
-    tzoersTeam: tzoer_tzoer(where: { team_id: { _eq: $team_id } }) {
+    tzoersTeam: tzoer_tzoer(
+      where: { team_id: { _eq: $team_id }, role_id: { _nin: [${SEGEL_ROLE_ID}, ${MANAGER_ROLE_ID}] } }
+    ) {
       id
       first_name
       last_name
@@ -37,11 +40,25 @@ export const GET_TZOERS_BY_TEAM = gql`
 
 export const GET_TZOERS_BY_PLUGA = gql`
   query ($pluga_id: Int!) {
-    plugaTzoers: tzoer_tzoer(where: { team: { pluga_id: { _eq: $pluga_id } } }) {
+    plugaTzoers: tzoer_tzoer(
+      where: { team: { pluga_id: { _eq: $pluga_id } }, role_id: { _nin: [${SEGEL_ROLE_ID}, ${MANAGER_ROLE_ID}] } }
+    ) {
       id
       first_name
       last_name
       team_id
+    }
+  }
+`;
+
+export const GET_TZOERS_AGGREGATE_BY_PLUGA = gql`
+  query ($pluga_id: Int!) {
+    plugaTzoersAggregate: tzoer_tzoer_aggregate(
+      where: { team: { pluga_id: { _eq: $pluga_id } }, role_id: { _nin: [${SEGEL_ROLE_ID}, ${MANAGER_ROLE_ID}] } }
+    ) {
+      aggregate {
+        count
+      }
     }
   }
 `;
