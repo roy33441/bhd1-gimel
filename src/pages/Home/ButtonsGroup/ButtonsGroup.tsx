@@ -43,7 +43,7 @@ const ButtonsGroup: FC = (): JSX.Element => {
   ];
 
   const driveByTeam = (team: number) =>
-    teamDrives.find(({ team }) => team === team)!.drive;
+    teamDrives.find(({ team: currentTeam }) => currentTeam === team)!.drive;
 
   return (
     <div className={classes.container}>
