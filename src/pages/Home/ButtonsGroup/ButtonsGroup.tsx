@@ -19,12 +19,31 @@ const ButtonsGroup: FC = (): JSX.Element => {
       "https://drive.google.com/drive/folders/1GOJ1MUcvZ6DGpi_-2Hu5g8XthiKdmSYR",
   };
 
-  const teamDrives = {
-    1: "https://drive.google.com/drive/folders/1-F3y_9hZp-bhX9xk_Sr_3BueU2_ov33D",
-    2: "https://drive.google.com/drive/folders/13lpBps8efMEmPS7A5cwqtIyCz2tKqvs9",
-    3: "https://drive.google.com/drive/folders/1Gu-ycw4oF1HsQLANm5BL9aA0QI-A1IJN",
-    4: "https://drive.google.com/drive/folders/112Y4aFHro9jL_4MX6pZTVpiDRmHsyX_W?usp=sharing",
-  };
+  const teamDrives = [
+    {
+      team: 1,
+      drive:
+        "https://drive.google.com/drive/folders/1-F3y_9hZp-bhX9xk_Sr_3BueU2_ov33D",
+    },
+    {
+      team: 2,
+      drive:
+        "https://drive.google.com/drive/folders/13lpBps8efMEmPS7A5cwqtIyCz2tKqvs9",
+    },
+    {
+      team: 3,
+      drive:
+        "https://drive.google.com/drive/folders/1Gu-ycw4oF1HsQLANm5BL9aA0QI-A1IJN",
+    },
+    {
+      team: 4,
+      drive:
+        "https://drive.google.com/drive/folders/112Y4aFHro9jL_4MX6pZTVpiDRmHsyX_W?usp=sharing",
+    },
+  ];
+
+  const driveByTeam = (team: number) =>
+    teamDrives.find(({ team }) => team === team)!.drive;
 
   return (
     <div className={classes.container}>
@@ -35,7 +54,7 @@ const ButtonsGroup: FC = (): JSX.Element => {
         color={theme.palette.primary.light}
       />
       <LinkButton
-        siteURL={teamDrives[loggedTzoer.team.id]}
+        siteURL={driveByTeam(loggedTzoer.team.id)}
         iconURL="icons/googleDrive.svg"
         label="דרייב צוותי"
         color={theme.palette.info.light}
