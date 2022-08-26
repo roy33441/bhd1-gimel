@@ -23,6 +23,21 @@ export const GET_ATTENDANCE_BY_PLUGA = gql`
   }
 `;
 
+export const GET_ATTENDANCET_TZOERS_BY_PLUGA = gql`
+  query ($pluga_id: Int!) {
+    attendance: tzoer_attendance(where: { tzoer: { team: { pluga_id: { _eq: $pluga_id } } } }) {
+      id
+      tzoer {
+        id
+        first_name
+        last_name
+      }
+      is_present
+      missing_reason
+    }
+  }
+`;
+
 export const UPSERT_ATTENDANCE = gql`
   mutation ($objects: [tzoer_attendance_insert_input!]!) {
     insert_tzoer_attendance(

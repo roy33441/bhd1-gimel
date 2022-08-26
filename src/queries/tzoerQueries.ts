@@ -50,3 +50,15 @@ export const GET_TZOERS_BY_PLUGA = gql`
     }
   }
 `;
+
+export const GET_TZOERS_AGGREGATE_BY_PLUGA = gql`
+  query ($pluga_id: Int!) {
+    plugaTzoersAggregate: tzoer_tzoer_aggregate(
+      where: { team: { pluga_id: { _eq: $pluga_id } }, role_id: { _nin: [${SEGEL_ROLE_ID}, ${MANAGER_ROLE_ID}] } }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+`;

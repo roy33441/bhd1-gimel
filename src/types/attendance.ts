@@ -16,3 +16,14 @@ export interface PreviewAttendance {
   };
   is_present: boolean;
 }
+
+export interface TotalAttendance {
+  id: number;
+  tzoer: {
+    id: number;
+    first_name: string;
+    last_name: string;
+  };
+  is_present: boolean;
+  missing_reason?: string;
+}
