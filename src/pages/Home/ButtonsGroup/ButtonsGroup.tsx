@@ -16,7 +16,7 @@ const ButtonsGroup: FC = (): JSX.Element => {
     idf: "https://www.idf.il/",
     moodle: "https://campus.digital.idf.il/",
     drive:
-      "https://drive.google.com/drive/folders/1GOJ1MUcvZ6DGpi_-2Hu5g8XthiKdmSYR",
+      "https://drive.google.com/drive/folders/1F9Npaoi4llEOJcX92dnrHpBz1bHwDzdn",
   };
 
   const teamDrives = [
