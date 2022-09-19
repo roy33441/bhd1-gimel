@@ -48,10 +48,16 @@ const ButtonsGroup: FC = (): JSX.Element => {
 
   return (
     <div className={classes.container}>
-      <LinkButton
+      {/* <LinkButton
         siteURL={sitesURLs.report}
         iconURL="icons/report.svg"
         label='דו"ח 1'
+        color={theme.palette.primary.light}
+      /> */}
+      <LinkButton
+        siteURL={sitesURLs.mikraout}
+        iconURL="icons/brain.svg"
+        label="טרוויה למבחנים"
         color={theme.palette.primary.light}
       />
       <LinkButton
