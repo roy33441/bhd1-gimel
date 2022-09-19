@@ -13,6 +13,7 @@ const ButtonsGroup: FC = (): JSX.Element => {
 
   const sitesURLs = {
     report: "https://one.prat.idf.il/",
+    mikraout: "https://omrimg2.github.io/mikraot_web.github.io/#/minified:Ff",
     idf: "https://www.idf.il/",
     moodle: "https://campus.digital.idf.il/",
     drive:
