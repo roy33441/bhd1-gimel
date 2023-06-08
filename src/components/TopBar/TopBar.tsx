@@ -21,7 +21,7 @@ const TopBar: FC = (): JSX.Element => {
           <img
             className={classes.iconButton}
             // src="icons/tikshuv.jpeg"
-            src="icons/arbel.jpeg"
+            src="icons/gimel.png"
             alt="logo"
           />
         </Button>

@@ -1,34 +1,34 @@
-import { FC, useState } from 'react';
-import Paper from '@material-ui/core/Paper';
-import Chip from '@material-ui/core/Chip';
-import SaveIcon from '@material-ui/icons/Save';
-import CreateIcon from '@material-ui/icons/Create';
-import Divider from '@material-ui/core/Divider';
-import { useQuery } from '@apollo/client/react/hooks/useQuery';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
+import { FC, useState } from "react";
+import Paper from "@material-ui/core/Paper";
+import Chip from "@material-ui/core/Chip";
+import SaveIcon from "@material-ui/icons/Save";
+import CreateIcon from "@material-ui/icons/Create";
+import Divider from "@material-ui/core/Divider";
+import { useQuery } from "@apollo/client/react/hooks/useQuery";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
 
-import { useStyles } from './AttendanceStyles';
-import Status from 'pages/Attendance/Status/Status';
-import NotReportedList from 'pages/Attendance/NotReportedList/NotReportedList';
-import PresentList from 'pages/Attendance/PresentList/PresentList';
-import MissingList from 'pages/Attendance/MissingList/MissingList';
-import { Team, TeamGQL } from 'types/team';
-import { GET_TEAMS_BY_PLUGA } from 'queries/teamsQueries';
-import auth from 'common/auth';
-import { Tzoer, TzoersTeamGQL } from 'types/tzoer';
-import { Attendance, AttendanceGQL } from 'types/attendance';
+import { useStyles } from "./AttendanceStyles";
+import Status from "pages/Attendance/Status/Status";
+import NotReportedList from "pages/Attendance/NotReportedList/NotReportedList";
+import PresentList from "pages/Attendance/PresentList/PresentList";
+import MissingList from "pages/Attendance/MissingList/MissingList";
+import { Team, TeamGQL } from "types/team";
+import { GET_TEAMS_BY_PLUGA } from "queries/teamsQueries";
+import auth from "common/auth";
+import { Tzoer, TzoersTeamGQL } from "types/tzoer";
+import { Attendance, AttendanceGQL } from "types/attendance";
 import {
   DELETE_ALL_ATTENDANCE_BY_TEAM,
   DELETE_TZOERS_BY_IDS,
   GET_ATTENDANCE_BY_TEAM,
-  UPSERT_ATTENDANCE
-} from 'queries/attendanceQueries';
-import { GET_TZOERS_BY_TEAM } from 'queries/tzoerQueries';
-import { useMutation } from '@apollo/client';
-import TotalAttendanceList from './TotalAttendanceList/TotalAttendanceList';
+  UPSERT_ATTENDANCE,
+} from "queries/attendanceQueries";
+import { GET_TZOERS_BY_TEAM } from "queries/tzoerQueries";
+import { useMutation } from "@apollo/client";
+import TotalAttendanceList from "./TotalAttendanceList/TotalAttendanceList";
 
-type AttendanceTzoer = Pick<Tzoer, 'id' | 'first_name' | 'last_name'>;
+type AttendanceTzoer = Pick<Tzoer, "id" | "first_name" | "last_name">;
 
 type AffectedRowsGQL = {
   insert_tzoer_attendance: {
@@ -40,28 +40,32 @@ const PLUGA_ID = -1;
 
 const AttendancePage: FC = (): JSX.Element => {
   const [isEditingReport, setIsEditingReport] = useState<boolean>(false);
-  const [modifiedAttendance, setModifiedAttendance] = useState<Attendance[]>([]);
+  const [modifiedAttendance, setModifiedAttendance] = useState<Attendance[]>(
+    []
+  );
   const classes = useStyles({ isEditingReport });
 
   const loggedTzoer: Tzoer = auth.getLoggedTzoer();
-  const [selectedTeamId, setSelectedTeamId] = useState<number>(loggedTzoer.team.id);
-
-  const { data: teams, loading: loadingTeams } = useQuery<TeamGQL, { pluga_id: number }>(
-    GET_TEAMS_BY_PLUGA,
-    {
-      variables: {
-        pluga_id: loggedTzoer.pluga.id
-      }
-    }
+  const [selectedTeamId, setSelectedTeamId] = useState<number>(
+    loggedTzoer.team.id
   );
+
+  const { data: teams, loading: loadingTeams } = useQuery<
+    TeamGQL,
+    { pluga_id: number }
+  >(GET_TEAMS_BY_PLUGA, {
+    variables: {
+      pluga_id: loggedTzoer.pluga.id,
+    },
+  });
 
   const { data: tzoersTeam, loading: loadingTzoersTeam } = useQuery<
     TzoersTeamGQL,
     { team_id: number }
   >(GET_TZOERS_BY_TEAM, {
     variables: {
-      team_id: selectedTeamId
-    }
+      team_id: selectedTeamId,
+    },
   });
 
   const { data: attendance, loading: loadingAttendance } = useQuery<
@@ -69,17 +73,17 @@ const AttendancePage: FC = (): JSX.Element => {
     { team_id: number }
   >(GET_ATTENDANCE_BY_TEAM, {
     variables: {
-      team_id: selectedTeamId
+      team_id: selectedTeamId,
     },
-    fetchPolicy: 'no-cache',
-    onCompleted: data => setModifiedAttendance(data.attendance)
+    fetchPolicy: "no-cache",
+    onCompleted: (data) => setModifiedAttendance(data.attendance),
   });
 
   const [clearAttendance, { loading: clearAttendanceLoading }] = useMutation<
     AffectedRowsGQL,
     { team_id: number }
   >(DELETE_ALL_ATTENDANCE_BY_TEAM, {
-    onCompleted: () => setModifiedAttendance([])
+    onCompleted: () => setModifiedAttendance([]),
   });
 
   const [updateAttendance, { loading: updateAttendanceLoading }] = useMutation<
@@ -87,12 +91,14 @@ const AttendancePage: FC = (): JSX.Element => {
     { objects: Attendance[] }
   >(UPSERT_ATTENDANCE);
 
-  const [removeNonReportedTzoers, { loading: removeNonReportedTzoersLoading }] = useMutation<
-    AffectedRowsGQL,
-    { deleted_tzoers_ids: number[] }
-  >(DELETE_TZOERS_BY_IDS, {
-    onCompleted: () => updateAttendance({ variables: { objects: modifiedAttendance } })
-  });
+  const [removeNonReportedTzoers, { loading: removeNonReportedTzoersLoading }] =
+    useMutation<AffectedRowsGQL, { deleted_tzoers_ids: number[] }>(
+      DELETE_TZOERS_BY_IDS,
+      {
+        onCompleted: () =>
+          updateAttendance({ variables: { objects: modifiedAttendance } }),
+      }
+    );
 
   if (
     clearAttendanceLoading ||
@@ -104,7 +110,7 @@ const AttendancePage: FC = (): JSX.Element => {
   ) {
     return (
       <div className={classes.loaderOrErrorContainer}>
-        <CircularProgress size={80} color='primary' />
+        <CircularProgress size={80} color="primary" />
       </div>
     );
   }
@@ -117,27 +123,38 @@ const AttendancePage: FC = (): JSX.Element => {
     );
   }
 
-  const dropdownTeams: Team[] = [{ id: PLUGA_ID, name: loggedTzoer.pluga.name }, ...teams.teams];
+  const dropdownTeams: Team[] = [
+    { id: PLUGA_ID, name: loggedTzoer.pluga.name },
+    ...teams.teams,
+  ];
 
   const notReportedTzoers: AttendanceTzoer[] = tzoersTeam.tzoersTeam.filter(
-    tzoer => !modifiedAttendance.find(tzoerAttendance => tzoerAttendance.tzoer_id === tzoer.id)
+    (tzoer) =>
+      !modifiedAttendance.find(
+        (tzoerAttendance) => tzoerAttendance.tzoer_id === tzoer.id
+      )
   );
 
-  const presentTzoers: AttendanceTzoer[] = tzoersTeam.tzoersTeam.filter(tzoer =>
-    modifiedAttendance
-      .filter(({ is_present }) => is_present)
-      .find(tzoerAttendance => tzoerAttendance.tzoer_id === tzoer.id)
+  const presentTzoers: AttendanceTzoer[] = tzoersTeam.tzoersTeam.filter(
+    (tzoer) =>
+      modifiedAttendance
+        .filter(({ is_present }) => is_present)
+        .find((tzoerAttendance) => tzoerAttendance.tzoer_id === tzoer.id)
   );
 
-  const missingTzoers: AttendanceTzoer[] = tzoersTeam.tzoersTeam.filter(tzoer =>
-    modifiedAttendance
-      .filter(({ is_present }) => !is_present)
-      .find(tzoerAttendance => tzoerAttendance.tzoer_id === tzoer.id)
+  const missingTzoers: AttendanceTzoer[] = tzoersTeam.tzoersTeam.filter(
+    (tzoer) =>
+      modifiedAttendance
+        .filter(({ is_present }) => !is_present)
+        .find((tzoerAttendance) => tzoerAttendance.tzoer_id === tzoer.id)
   );
 
   const deleted_tzoers_ids: number[] = attendance.attendance
     .filter(
-      prevTzoer => !modifiedAttendance.find(newTzoer => prevTzoer.tzoer_id === newTzoer.tzoer_id)
+      (prevTzoer) =>
+        !modifiedAttendance.find(
+          (newTzoer) => prevTzoer.tzoer_id === newTzoer.tzoer_id
+        )
     )
     .map(({ tzoer_id }) => tzoer_id);
 
@@ -146,12 +163,14 @@ const AttendancePage: FC = (): JSX.Element => {
       className={classes.saveReportChip}
       onClick={() => {
         removeNonReportedTzoers({ variables: { deleted_tzoers_ids } });
+        console.log(deleted_tzoers_ids);
+        console.log(attendance);
         setIsEditingReport(false);
       }}
       icon={<SaveIcon />}
-      size='small'
-      color='secondary'
-      label='שמור דיווח'
+      size="small"
+      color="secondary"
+      label="שמור דיווח"
     />
   );
 
@@ -159,9 +178,9 @@ const AttendancePage: FC = (): JSX.Element => {
     <Chip
       className={classes.editReportChip}
       onClick={() => setIsEditingReport(true)}
-      icon={<CreateIcon style={{ color: 'white' }} />}
-      size='small'
-      label='ערוך דיווח'
+      icon={<CreateIcon style={{ color: "white" }} />}
+      size="small"
+      label="ערוך דיווח"
     />
   );
 
@@ -180,7 +199,9 @@ const AttendancePage: FC = (): JSX.Element => {
       ) : (
         <>
           <Status
-            onClearAttendance={() => clearAttendance({ variables: { team_id: selectedTeamId } })}
+            onClearAttendance={() =>
+              clearAttendance({ variables: { team_id: selectedTeamId } })
+            }
             present={presentTzoers.length}
             missing={missingTzoers.length}
             total={tzoersTeam.tzoersTeam.length}

@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: "transparent",
     border: "transparent",
     // borderRadius: '50%',
-    width: theme.spacing(9.5),
+    width: theme.spacing(20),
     marginLeft: theme.spacing(0.8),
     marginTop: theme.spacing(-0.5),
   },
