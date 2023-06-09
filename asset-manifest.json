@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.31690426.css",
-    "main.js": "/static/js/main.1c9c76aa.js",
-    "static/js/377.b33aecdb.chunk.js": "/static/js/377.b33aecdb.chunk.js",
-    "service-worker.js": "/service-worker.js",
-    "index.html": "/index.html",
-    "main.31690426.css.map": "/static/css/main.31690426.css.map",
-    "main.1c9c76aa.js.map": "/static/js/main.1c9c76aa.js.map",
-    "377.b33aecdb.chunk.js.map": "/static/js/377.b33aecdb.chunk.js.map"
+    "main.css": "//roy33441.github.io/bhd1-gimel/static/css/main.31690426.css",
+    "main.js": "//roy33441.github.io/bhd1-gimel/static/js/main.9ea4545d.js",
+    "static/js/377.b33aecdb.chunk.js": "//roy33441.github.io/bhd1-gimel/static/js/377.b33aecdb.chunk.js",
+    "service-worker.js": "//roy33441.github.io/bhd1-gimel/service-worker.js",
+    "index.html": "//roy33441.github.io/bhd1-gimel/index.html",
+    "main.31690426.css.map": "//roy33441.github.io/bhd1-gimel/static/css/main.31690426.css.map",
+    "main.9ea4545d.js.map": "//roy33441.github.io/bhd1-gimel/static/js/main.9ea4545d.js.map",
+    "377.b33aecdb.chunk.js.map": "//roy33441.github.io/bhd1-gimel/static/js/377.b33aecdb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.31690426.css",
-    "static/js/main.1c9c76aa.js"
+    "static/js/main.9ea4545d.js"
   ]
 }
