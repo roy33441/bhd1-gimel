@@ -13,15 +13,19 @@ import WithAuthentication from "components/WithAuthentication";
 
 const Router: FC = (): JSX.Element => (
   <Switch>
-    <PublicRoute path="/login" component={Login} />
-    <ProtectedRoute exact path="/" render={() => <Redirect to="/home" />} />
+    <PublicRoute path="/bhd1-gimel/login" component={Login} />
+    <ProtectedRoute
+      exact
+      path="/"
+      render={() => <Redirect to="/bhd1-gimel/home" />}
+    />
     <WithAuthentication>
       <>
         <TopBar />
         <div style={{ marginBottom: "10vh" }}>
-          <Route path="/home" component={Home} />
-          <Route path="/tests" component={Tests} />
-          <Route path="/attendance" component={AttendancePage} />
+          <Route path="/bhd1-gimel/home" component={Home} />
+          <Route path="/bhd1-gimel/tests" component={Tests} />
+          <Route path="/bhd1-gimel/attendance" component={AttendancePage} />
           {/* <Redirect to='/home' /> */}
         </div>
         <BottomBar />
