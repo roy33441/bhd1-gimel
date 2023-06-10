@@ -24,7 +24,7 @@ const BottomBar: FC = (): JSX.Element => {
     <Icon>
       <img
         className={classes.imageIcon}
-        src="bhd1-gimel/icons/home.svg"
+        src="/bhd1-gimel/icons/home.svg"
         alt="home"
       />
     </Icon>
@@ -34,7 +34,7 @@ const BottomBar: FC = (): JSX.Element => {
     <Icon>
       <img
         className={classes.imageIcon}
-        src="attendance/icons/attendance.svg"
+        src="/bhd1-gimel/icons/attendance.svg"
         alt="attendance"
       />
     </Icon>
@@ -42,7 +42,11 @@ const BottomBar: FC = (): JSX.Element => {
 
   const testIcon: JSX.Element = (
     <Icon>
-      <img className={classes.imageIcon} src="icons/test.svg" alt="test" />
+      <img
+        className={classes.imageIcon}
+        src="/bhd1-gimel/icons/test.svg"
+        alt="test"
+      />
     </Icon>
   );
 
