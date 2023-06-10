@@ -11,9 +11,9 @@ const BottomBar: FC = (): JSX.Element => {
   const history = useHistory();
 
   const routesPaths: Record<string, number> = {
-    "bhd1-gimel/attendance": 0,
-    "bhd1-gimel/home": 1,
-    "bhd1-gimel/tests": 2,
+    "/bhd1-gimel/attendance": 0,
+    "/bhd1-gimel/home": 1,
+    "/bhd1-gimel/tests": 2,
   };
 
   const [value, setValue] = useState<number>(
