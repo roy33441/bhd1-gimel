@@ -81,7 +81,7 @@ const Login: FC = (): JSX.Element => {
     };
 
     auth.saveLoggedTzoer(loggedTzoer);
-    history.push("/home");
+    history.push("/bhd1-gimel/home");
   };
 
   const [getLoginTzoer, { loading }] = useLazyQuery<
