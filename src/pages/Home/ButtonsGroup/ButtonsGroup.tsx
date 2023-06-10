@@ -48,24 +48,24 @@ const ButtonsGroup: FC = (): JSX.Element => {
 
   return (
     <div className={classes.container}>
-      {/* <LinkButton
+      <LinkButton
         siteURL={sitesURLs.report}
         iconURL="icons/report.svg"
         label='דו"ח 1'
         color={theme.palette.primary.light}
-      /> */}
+      />
       <LinkButton
         siteURL={sitesURLs.mikraout}
         iconURL="icons/brain.svg"
         label="טרוויה למבחנים"
         color={theme.palette.primary.light}
       />
-      <LinkButton
+      {/* <LinkButton
         siteURL={driveByTeam(loggedTzoer.team.id)}
         iconURL="icons/googleDrive.svg"
         label="דרייב צוותי"
         color={theme.palette.info.light}
-      />
+      /> */}
       <LinkButton
         siteURL={sitesURLs.moodle}
         iconURL="icons/moodle.svg"
@@ -73,11 +73,17 @@ const ButtonsGroup: FC = (): JSX.Element => {
         color={theme.palette.success.light}
       />
       <LinkButton
+        siteURL={sitesURLs.idf}
+        iconURL="icons/idf.svg"
+        label='אתר צה"ל'
+        color={theme.palette.info.light}
+      />
+      {/* <LinkButton
         siteURL={sitesURLs.drive}
         iconURL="icons/googleDrive.svg"
         label="דרייב קהד"
         color={"#BFACC8"}
-      />
+      /> */}
     </div>
   );
 };
