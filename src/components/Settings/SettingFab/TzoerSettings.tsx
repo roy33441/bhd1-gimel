@@ -76,7 +76,7 @@ const TzoerSettings: FC = (): any => {
       const tzoer: Tzoer = {
         ...currTzoer,
         personal_id: String(currTzoer.personal_id),
-        password: String("Aa" + currTzoer.personal_id + "!"),
+        password: String(currTzoer.personal_id),
       };
       newTzoerArray.push(tzoer);
     });
